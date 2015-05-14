@@ -7,26 +7,29 @@
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
 	<style>
 		body { 
-			margin:0; padding:0;
+			margin:0;
+			padding:0;
+			line-height: 20px;
 			font-family: 'Slabo 27px', serif;
 		}
-		#map { position:absolute; top:0; bottom:0; width:100%; }
+		#map { 
+			position:absolute;
+			top:0;
+			bottom:0;
+			width:100%;
+		}
 		.intro {
 			z-index: 1;
 			top: 10px;
 			right: 10px;
 			position: absolute;
 			box-sizing: border-box;
+			box-shadow: 3px 3px 3px #BCBABA;
 			background: #f9f9f9;
-			border-style: solid;
 			border-radius: 5px;
-			border-width: 5px;
-			border-top-color: #e5e5e5;
-			border-right-color: #eee;
-			border-bottom-color: #e5e5e5;
-			border-left-color: #eee;
 			padding: 10px;
 			width: 500px;
+			opacity: 0.9;
 		}
 		#head {
 			font-size: 30px;
@@ -42,8 +45,9 @@
 <body>
 	<div class='intro'>
 		<p id='head'>OpenStreetMap India</p> 
-		<p id='desc'>Welcome! This map is from OpenStreetMap with the correct international borders of India. You are free to use them in your project. Please send an email to the OpenStreetMap India mailing list to know more. </p>
-		<p id='subhead'>Usage</p>
+		<p id='desc'>Welcome! This map is from <a href="https://openstreetmap.com">OpenStreetMap</a> with the correct international borders of India. You are free to use them in your project. Please send an email to the <a href='https://lists.openstreetmap.org/listinfo/talk-in'>OpenStreetMap India mailing list</a> to know more. </p>
+
+		<p>The tiles are served from mapbox.com and the scheme is - http://{a,b,c}.tiles.mapbox.com/v4/planemad.c1d2ec5a/z/x/y.png?access_token=your_access_token</p>
 	</div>
 
 	<div id='map'></div>
