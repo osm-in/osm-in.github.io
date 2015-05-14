@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OpenStreetMap India</title>
+	<link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+	<style>
+		body { 
+			margin:0; padding:0;
+			font-family: 'Slabo 27px', serif;
+		}
+		#map { position:absolute; top:0; bottom:0; width:100%; }
+		.intro {
+			z-index: 1;
+			top: 10px;
+			right: 10px;
+			position: absolute;
+			box-sizing: border-box;
+			background: #f9f9f9;
+			border-style: solid;
+			border-radius: 5px;
+			border-width: 5px;
+			border-top-color: #e5e5e5;
+			border-right-color: #eee;
+			border-bottom-color: #e5e5e5;
+			border-left-color: #eee;
+			padding: 10px;
+			width: 500px;
+		}
+		#head {
+			font-size: 30px;
+		}
+		#subhead {
+			font-size: 20px;
+		}
+		#instructions {
+
+		}
+	</style>
+</head>
+<body>
+	<div class='intro'>
+		<p id='head'>OpenStreetMap India</p> 
+		<p id='desc'>Welcome! This map is from OpenStreetMap with the correct international borders of India. You are free to use them in your project. Please send an email to the OpenStreetMap India mailing list to know more. </p>
+		<p id='subhead'>Usage</p>
+	</div>
+
+	<div id='map'></div>
+
+	<script>
+	// Provide your access token
+	L.mapbox.accessToken = 'pk.eyJ1IjoiZ2VvaGFja2VyIiwiYSI6ImFIN0hENW8ifQ.GGpH9gLyEg0PZf3NPQ7Vrg';
+	// Create a map in the div #map
+	L.mapbox.map('map', 'planemad.c1d2ec5a')
+	.setView([23.080, 84.067], 5);
+</script>
+
+</body>
+</html>
