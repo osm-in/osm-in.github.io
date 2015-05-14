@@ -1,6 +1,5 @@
 # openstreetmap.in
 
-Landing page for openstreetmap.in
 ![screen shot 2015-05-14 at 16 33 25](https://cloud.githubusercontent.com/assets/371666/7630752/02231c90-fa57-11e4-9f5d-3f24b9b6cc1d.png)
 
 # Using this map
