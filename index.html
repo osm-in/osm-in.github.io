@@ -31,33 +31,27 @@
 			width: 500px;
 			opacity: 0.9;
 		}
-		#head {
-			font-size: 30px;
-		}
-		#subhead {
-			font-size: 20px;
-		}
-		#instructions {
-
-		}
 	</style>
 </head>
 <body>
 	<div class='intro'>
-		<p id='head'>OpenStreetMap India</p> 
-		<p id='desc'>Welcome! This map is from <a href="https://openstreetmap.com">OpenStreetMap</a> with the correct international borders of India. You are free to use them in your project. Please send an email to the <a href='https://lists.openstreetmap.org/listinfo/talk-in'>OpenStreetMap India mailing list</a> to know more. </p>
-
-		<p>The tiles are served from mapbox.com and the scheme is - http://{a,b,c}.tiles.mapbox.com/v4/planemad.c1d2ec5a/z/x/y.png?access_token=your_access_token</p>
+		<p><b>Welcome to OpenStreetMap India.</b> OpenStreetMap is the free editable map of the world. Join the conversation in India on <a href="https://lists.openstreetmap.org/listinfo/talk-in">talk-in</a>. <a href="">Learn how to use this map</a>. <a href="http://learnosm.org/">Join the project and edit the map</a></p>
 	</div>
 
 	<div id='map'></div>
 
 	<script>
+
+	// Lock to India bounds
+	var southWest = L.latLng(7.319, 61.523),
+		northEast = L.latLng(36.774, 100.635),
+		bounds = L.latLngBounds(southWest, northEast);
+
 	// Provide your access token
 	L.mapbox.accessToken = 'pk.eyJ1IjoiZ2VvaGFja2VyIiwiYSI6ImFIN0hENW8ifQ.GGpH9gLyEg0PZf3NPQ7Vrg';
 	// Create a map in the div #map
-	L.mapbox.map('map', 'planemad.c1d2ec5a')
-	.setView([23.080, 84.067], 5);
+	L.mapbox.map('map', 'planemad.c1d2ec5a', {maxBounds: bounds})
+	.setView([22.14980, 79.08060], 5);
 </script>
 
 </body>
