@@ -52,7 +52,8 @@
 	L.mapbox.accessToken = 'pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
 	// Create a map in the div #map
 	var map = L.mapbox.map('map', 'openstreetmap.1b68f018', {maxBounds: bounds})
-	.setView([22.14980, 79.08060], 5);
+        .addControl(L.mapbox.geocoderControl('mapbox.places', { autocomplete: true }))
+        .setView([22.14980, 79.08060], 5);
     L.hash(map);
 </script>
 
