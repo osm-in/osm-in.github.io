@@ -45,8 +45,8 @@
 
 	// Lock to India bounds
 	var southWest = L.latLng(7.319, 61.523),
-		northEast = L.latLng(36.774, 100.635),
-		bounds = L.latLngBounds(southWest, northEast);
+    northEast = L.latLng(36.774, 100.635),
+    bounds = L.latLngBounds(southWest, northEast);
 
 	// Provide your access token
 	L.mapbox.accessToken = 'pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
@@ -54,6 +54,7 @@
 	var map = L.mapbox.map('map', 'openstreetmap.1b68f018', {maxBounds: bounds})
         .addControl(L.mapbox.geocoderControl('mapbox.places', { autocomplete: true }))
         .setView([22.14980, 79.08060], 5);
+        
     L.hash(map);
 </script>
 
