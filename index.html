@@ -58,7 +58,7 @@
         // Provide your access token
         L.mapbox.accessToken = 'pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
 
-        // layers
+        // Definte tile urls of each layer
         var indiaMap = L.mapbox.tileLayer('openstreetmap.1b68f018'),
             bhuvanSatellite = L.tileLayer('http://tile1.nrsc.gov.in/tilecache/tilecache.py/1.0.0/bhuvan_imagery2/{z}/{x}/{y}.jepg', {
                 attribution: 'NRSC/ISRO'
@@ -99,6 +99,7 @@
 
         //Add layer control
         L.control.layers(baseLayers, overlayMaps).addTo(map);
+        
     </script>
 
 </body>
