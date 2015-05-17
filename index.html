@@ -1,62 +1,266 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>OpenStreetMap India</title>
-	<link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
-	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
-	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
-	<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
-	<style>
-		body { 
-			margin:0;
-			padding:0;
-			line-height: 20px;
-			font-family: 'Slabo 27px', serif;
-		}
-		#map { 
-			position:absolute;
-			top:0;
-			bottom:0;
-			width:100%;
-		}
-		.intro {
-			z-index: 1;
-			top: 10px;
-			right: 10px;
-			position: absolute;
-			box-sizing: border-box;
-			box-shadow: 3px 3px 3px #BCBABA;
-			background: #f9f9f9;
-			border-radius: 5px;
-			padding: 10px;
-			width: 500px;
-			opacity: 0.9;
-		}
-	</style>
-</head>
-<body>
-	<div class='intro'>
-		<p><b>Welcome to OpenStreetMap India.</b> OpenStreetMap is the free editable map of the world. Join the conversation in India on <a href="https://lists.openstreetmap.org/listinfo/talk-in">talk-in</a>. <a href="https://github.com/geohacker/openstreetmap.in#using-this-map">Learn how to use this map</a>. <a href="http://learnosm.org/">Join the project and edit the map</a></p>
-	</div>
+    <title>OpenStreetMap India</title>
+    <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
-	<div id='map'></div>
-
-	<script>
-
-	// Lock to India bounds
-	var southWest = L.latLng(7.319, 61.523),
-    northEast = L.latLng(36.774, 100.635),
-    bounds = L.latLngBounds(southWest, northEast);
-
-	// Provide your access token
-	L.mapbox.accessToken = 'pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
-	// Create a map in the div #map
-	var map = L.mapbox.map('map', 'openstreetmap.1b68f018', {maxBounds: bounds})
-        .addControl(L.mapbox.geocoderControl('mapbox.places', { autocomplete: true }))
-        .setView([22.14980, 79.08060], 5);
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            line-height: 20px;
+            font-family: 'Slabo 27px', serif;
+        }
         
-    L.hash(map);
-</script>
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .intro {
+            z-index: 1;
+            top: 10px;
+            right: 10px;
+            position: absolute;
+            box-sizing: border-box;
+            box-shadow: 3px 3px 3px #BCBABA;
+            background: #f9f9f9;
+            border-radius: 5px;
+            padding: 10px;
+            width: 500px;
+            opacity: 0.9;
+        }
+        /* Map layer menu ui */
+        
+        .menu-ui {
+            background: #fff;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+            border-radius: 3px;
+            width: 120px;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+        }
+        
+        .menu-ui a {
+            font-size: 13px;
+            color: #404040;
+            display: block;
+            margin: 0;
+            padding: 0;
+            padding: 10px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+        
+        .menu-ui a:first-child {
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .menu-ui a:last-child {
+            border: none;
+            border-radius: 0 0 3px 3px;
+        }
+        
+        .menu-ui a:hover {
+            background: #f8f8f8;
+            color: #404040;
+        }
+        
+        .menu-ui a.active {
+            background: #3887BE;
+            color: #FFF;
+        }
+        
+        .menu-ui a.active:hover {
+            background: #3074a4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='intro'>
+        <p><b>Welcome to OpenStreetMap India.</b> OpenStreetMap is the free editable map of the world. Join the conversation in India on <a href="https://lists.openstreetmap.org/listinfo/talk-in">talk-in</a>. <a href="https://github.com/geohacker/openstreetmap.in#using-this-map">Learn how to use this map</a>. <a href="http://learnosm.org/">Join the project and edit the map</a>
+        </p>
+    </div>
+
+    <nav id='menu-ui' class='menu-ui'></nav>
+    <div id='map'></div>
+
+    <script>
+        // Lock to India bounds
+        var southWest = L.latLng(7.319, 61.523),
+            northEast = L.latLng(36.774, 100.635),
+            bounds = L.latLngBounds(southWest, northEast);
+
+
+        // Base layers
+        var indiaMap = L.mapbox.tileLayer('openstreetmap.1b68f018'),
+            bhuvanSatellite = L.tileLayer('http://tile1.nrsc.gov.in/tilecache/tilecache.py/1.0.0/bhuvan_imagery2/{z}/{x}/{y}.jepg', {
+                attribution: 'NRSC/ISRO">OpenStreetMap</a>'
+            });
+
+        // Provide your access token
+        L.mapbox.accessToken = 'pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
+        // Create a map in the div #map
+        var map = L.mapbox.map('map', {
+                maxBounds: bounds,
+                layers: [indiaMap, bhuvanSatellite]
+            })
+            .addControl(L.mapbox.geocoderControl('mapbox.places', {
+                autocomplete: true
+            }))
+            .setView([22.14980, 79.08060], 5);
+
+        L.hash(map);
+
+
+
+        var layers = document.getElementById('menu-ui');
+
+        // Overlay map layers with transparancy
+        var overlays = {
+            'physical': {
+                'id': 'planemad.e76fee83',
+                'name': 'Physical',
+                'slug': 'physical',
+                'z': 0,
+                'layer': L.mapbox.tileLayer('planemad.e76fee83')
+            },
+            'highway': {
+                'id': 'planemad.66359ac0',
+                'name': 'Highway Overlay',
+                'slug': 'highway',
+                'z': 0,
+                'layer': L.mapbox.tileLayer('planemad.66359ac0')
+            }
+        };
+
+        // Add overlays to the map
+        for (var l in overlays) {
+            addLayer(overlays[l].slug, overlays[l].name, overlays[l].z, overlays[l].zoomTo);
+        }
+
+        var baseLayers = {
+            "OSM Mapnik": osmMap,
+            "Landscape": landMap
+        };
+
+        //Add layer control
+        L.control.layers(baseLayers).addTo(map);
+
+        
+        function addLayer(slug, name, zIndex, zoomTo) {
+            // Create a simple layer switcher that
+            // toggles layers on and off.
+            var link = document.createElement('a');
+            link.href = '#';
+            link.className = slug;
+            link.innerHTML = name;
+
+            link.onclick = function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                switchLayer(slug, zoomTo);
+            };
+
+            layers.appendChild(link);
+        }
+
+
+        if (window.location.search) {
+            var layers = getCurrentLayersFromURL();
+            for (var i = 0; i < layers.length; i++) {
+                switchLayer(layers[i]);
+                //switchLayer(window.location.search.split('=')[1]);
+            }
+        }
+
+        function switchLayer(slug, zoomTo) {
+            element = $('.' + slug);
+
+            var layer = overlays[slug].layer;
+            var gridLayer = overlays[slug].gridLayer;
+            if (map.hasLayer(layer)) {
+                //window.location.search = '';
+                removeLayerState(slug);
+                map.removeLayer(layer);
+                if (gridLayer) {
+                    map.removeLayer(gridLayer);
+                }
+                $('.' + slug).removeClass('active');
+            } else {
+                map.addLayer(layer);
+                if (overlays[slug].gridLayer) {
+                    gridLayer.addTo(map);
+                    // var gridControl = L.mapbox.gridControl(gridLayer).addTo(map);
+                    gridLayer.on('click', function (e) {
+                        if (!e.data) return;
+                        var popup = L.popup()
+                            .setLatLng(e.latLng)
+                            .setContent(JSON.stringify(e.data))
+                            .openOn(map);
+                    });
+                }
+                if (zoomTo) {
+                    map.setView(zoomTo[0], zoomTo[1]);
+                }
+                addLayerState(slug);
+                //window.location.search = 'layer='+slug;
+                $('.' + slug).addClass('active');
+            }
+        }
+
+        function removeLayerState(slug) {
+            var currentLayers = getCurrentLayersFromURL();
+            var newLayers = [];
+            currentLayers.forEach(function (layer) {
+                if (layer !== slug) {
+                    newLayers.push(layer);
+                }
+            });
+            var layerString = newLayers.join(",");
+            setLayersState(layerString);
+        }
+
+        function getCurrentLayersFromURL() {
+            var currentLayers = [];
+            var search = window.location.search;
+            if (search !== '') {
+                currentLayers = search.split("=")[1].split(",")
+            }
+            return currentLayers;
+        }
+
+        function addLayerState(slug) {
+            var currentLayers = getCurrentLayersFromURL();
+            if (currentLayers.indexOf(slug) === -1) {
+                currentLayers.push(slug);
+            }
+            var layerString = currentLayers.join(",");
+            setLayersState(layerString);
+        }
+
+        function setLayersState(layersString) {
+            var url;
+            if (layersString === '') {
+                url = '?' + window.location.hash;
+            } else {
+                url = "?layers=" + layersString + window.location.hash;
+            }
+            window.history.replaceState(null, null, url);
+        }
+    </script>
 
 </body>
+
 </html>
