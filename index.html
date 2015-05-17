@@ -113,8 +113,10 @@
             truemarbleSatellite = L.mapbox.tileLayer('planemad.e76fee83'),
             highwaysMap = L.mapbox.tileLayer('planemad.66359ac0'),
             connectivityGraph = L.mapbox.tileLayer('planemad.5504651b');
+        railwayMap = L.mapbox.tileLayer('planemad.e5dd1290');
 
         var baseLayers = {
+            "Railway Map":railwayMap,
             "Bhuvan Satellite": bhuvanSatellite,
             "NASA Satellite": truemarbleSatellite,
             "OSM India": indiaMap
