@@ -64,21 +64,21 @@
                 attribution: 'NRSC/ISRO'
             }),
             postalMap = L.mapbox.tileLayer('planemad.9acc2036'),
-            truemarbleSatellite = L.mapbox.tileLayer('planemad.e76fee83'),
+            // truemarbleSatellite = L.mapbox.tileLayer('planemad.e76fee83'),
             highwaysMap = L.mapbox.tileLayer('planemad.66359ac0'),
-            connectivityGraph = L.mapbox.tileLayer('planemad.5504651b');
-        railwayMap = L.mapbox.tileLayer('planemad.e5dd1290');
+            connectivityGraph = L.mapbox.tileLayer('planemad.5504651b'),
+            railwayMap = L.mapbox.tileLayer('planemad.e5dd1290');
 
         var baseLayers = {
             "Railway Map":railwayMap,
             "Bhuvan Satellite": bhuvanSatellite,
-            "NASA Satellite": truemarbleSatellite,
-            "OSM India": indiaMap
+            // "NASA Satellite": truemarbleSatellite,
+            "OpenStreetMap India": indiaMap
         };
 
         var overlayMaps = {
             "Highway": highwaysMap,
-            "Postal Codes":postalMap,
+            "Postal Codes": postalMap,
             "Connectivity": connectivityGraph
         };
 
@@ -98,7 +98,7 @@
 
 
         //Add layer control
-        L.control.layers(baseLayers, overlayMaps).addTo(map);
+        L.control.layers(baseLayers, overlayMaps, {position: 'topleft'}).addTo(map);
         
     </script>
 
