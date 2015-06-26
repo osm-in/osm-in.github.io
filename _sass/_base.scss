@@ -38,24 +38,90 @@ body {
 //Header
 header {
     background-color: #2c2a2a;
+    height: 48px;
+    width: 100%;
+    border-bottom: 2px solid orange;
     h1 {
-        a,:visited{
-        color: white;
+        a, :visited {
+            color: white;
+            &:hover {
+                text-decoration: none;
+            }
         }
+        float: left;
         padding: 10px;
         font-size: 20px;
+        width: 200px;
         img {
             max-width: 35px;
         }
     }
 }
 
-footer{
+footer {
     position: absolute;
     bottom: 0;
-    height:30px;
+    height: 30px;
     width: 100%;
     background-color: black;
+    .links {
+        padding-top: 2px!important;
+        a {
+            border: none!important;
+            font-size: 80%!important;
+        }
+    }
+}
+
+ul.links {
+    float: left;
+    margin: 0;
+    padding-top: 6px;
+    li {
+        list-style: none;
+        float: left;
+        a, a:visited {
+            display: inline-block;
+            height: 30px;
+            width: 100px;
+            text-align: center;
+            border: 1px solid #aaa;
+            margin-right: 10px;
+            color: #ddd;
+            line-height: 31px;
+            &:hover {
+                color: white;
+            }
+        }
+    }
+}
+
+//Map
+
+        #map {
+            position: absolute;
+            top: 50px;
+            bottom: 30px;
+            width: 100%;
+        }
+        
+        .intro {
+            z-index: 1;
+            top: 10px;
+            right: 50px;
+            position: absolute;
+            box-sizing: border-box;
+            box-shadow: 3px 3px 3px #BCBABA;
+            background: #f9f9f9;
+            border-radius: 5px;
+            padding: 10px;
+            width: 500px;
+            opacity: 0.9;
+        }
+//Content
+.content {
+    padding-top: 30px;
+    padding-left: 10px;
 }
 /**
  * Set `margin-bottom` to maintain vertical rhythm
