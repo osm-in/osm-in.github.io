@@ -1,107 +1,65 @@
-<!DOCTYPE html>
-<html>
+---
+layout: default
+title: OpenStreetMap India
+---
 
-<head>
-    <title>OpenStreetMap India</title>
-    <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
-    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
-    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<div class='intro'>
+    <p><b>Welcome to OpenStreetMap India.</b> OpenStreetMap is the free editable map of the world. Join the conversation in India on <a href="https://lists.openstreetmap.org/listinfo/talk-in">talk-in</a>. <a href="https://github.com/geohacker/openstreetmap.in#using-this-map">Learn how to use this map</a>. <a href="http://learnosm.org/">Join the project and edit the map</a>
+    </p>
+</div>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            line-height: 20px;
-            font-family: 'Slabo 27px', serif;
-        }
-        
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-        
-        .intro {
-            z-index: 1;
-            top: 10px;
-            right: 10px;
-            position: absolute;
-            box-sizing: border-box;
-            box-shadow: 3px 3px 3px #BCBABA;
-            background: #f9f9f9;
-            border-radius: 5px;
-            padding: 10px;
-            width: 500px;
-            opacity: 0.9;
-        }
-        
-    </style>
-</head>
+<div id='map'></div>
 
-<body>
-    <div class='intro'>
-        <p><b>Welcome to OpenStreetMap India.</b> OpenStreetMap is the free editable map of the world. Join the conversation in India on <a href="https://lists.openstreetmap.org/listinfo/talk-in">talk-in</a>. <a href="https://github.com/geohacker/openstreetmap.in#using-this-map">Learn how to use this map</a>. <a href="http://learnosm.org/">Join the project and edit the map</a>
-        </p>
-    </div>
+<script>
+    // Lock to India bounds
+    var southWest = L.latLng(7.319, 61.523),
+        northEast = L.latLng(36.774, 100.635),
+        bounds = L.latLngBounds(southWest, northEast);
 
-    <div id='map'></div>
+    // Provide your access token
+    L.mapbox.accessToken = 'pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
 
-    <script>
-        // Lock to India bounds
-        var southWest = L.latLng(7.319, 61.523),
-            northEast = L.latLng(36.774, 100.635),
-            bounds = L.latLngBounds(southWest, northEast);
+    // Definte tile urls of each layer
+    var indiaMap = L.mapbox.tileLayer('openstreetmap.1b68f018'),
+        bhuvanSatellite = L.tileLayer('http://tile1.nrsc.gov.in/tilecache/tilecache.py/1.0.0/bhuvan_imagery2/{z}/{x}/{y}.jepg', {
+            attribution: 'NRSC/ISRO'
+        }),
+        postalMap = L.mapbox.tileLayer('planemad.9acc2036'),
+        // truemarbleSatellite = L.mapbox.tileLayer('planemad.e76fee83'),
+        highwaysMap = L.mapbox.tileLayer('planemad.66359ac0'),
+        connectivityGraph = L.mapbox.tileLayer('planemad.5504651b'),
+        railwayMap = L.mapbox.tileLayer('planemad.e5dd1290');
 
-        // Provide your access token
-        L.mapbox.accessToken = 'pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q';
+    var baseLayers = {
+        "Railway Map": railwayMap,
+        "Bhuvan Satellite": bhuvanSatellite,
+        // "NASA Satellite": truemarbleSatellite,
+        "OpenStreetMap India": indiaMap
+    };
 
-        // Definte tile urls of each layer
-        var indiaMap = L.mapbox.tileLayer('openstreetmap.1b68f018'),
-            bhuvanSatellite = L.tileLayer('http://tile1.nrsc.gov.in/tilecache/tilecache.py/1.0.0/bhuvan_imagery2/{z}/{x}/{y}.jepg', {
-                attribution: 'NRSC/ISRO'
-            }),
-            postalMap = L.mapbox.tileLayer('planemad.9acc2036'),
-            // truemarbleSatellite = L.mapbox.tileLayer('planemad.e76fee83'),
-            highwaysMap = L.mapbox.tileLayer('planemad.66359ac0'),
-            connectivityGraph = L.mapbox.tileLayer('planemad.5504651b'),
-            railwayMap = L.mapbox.tileLayer('planemad.e5dd1290');
+    var overlayMaps = {
+        "Highway": highwaysMap,
+        "Postal Codes": postalMap,
+        "Connectivity": connectivityGraph
+    };
 
-        var baseLayers = {
-            "Railway Map":railwayMap,
-            "Bhuvan Satellite": bhuvanSatellite,
-            // "NASA Satellite": truemarbleSatellite,
-            "OpenStreetMap India": indiaMap
-        };
+    // Create a map in the div #map
+    var map = L.map('map', {
+            layers: indiaMap
+        }, {
+            maxBounds: bounds,
 
-        var overlayMaps = {
-            "Highway": highwaysMap,
-            "Postal Codes": postalMap,
-            "Connectivity": connectivityGraph
-        };
+        })
+        .addControl(L.mapbox.geocoderControl('mapbox.places', {
+            autocomplete: true
+        }))
+        .setView([22.14980, 79.08060], 5);
 
-        // Create a map in the div #map
-        var map = L.map('map', {
-                layers: indiaMap
-            }, {
-                maxBounds: bounds,
-
-            })
-            .addControl(L.mapbox.geocoderControl('mapbox.places', {
-                autocomplete: true
-            }))
-            .setView([22.14980, 79.08060], 5);
-
-        L.hash(map);
+    L.hash(map);
 
 
-        //Add layer control
-        L.control.layers(baseLayers, overlayMaps, {position: 'topleft'}).addTo(map);
-        
-    </script>
-
-</body>
-
-</html>
+    //Add layer control
+    L.control.layers(baseLayers, overlayMaps, {
+        position: 'topleft'
+    }).addTo(map);
+</script>
