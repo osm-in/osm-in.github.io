@@ -1,9 +1,9 @@
 ---
 layout: default
-title: OpenStreetMap India Data
+title: Data
 ---
 
-# Data Extracts
+# Extracts
 OpenStreetMap data is available for download in a varierty of formats for your GIS needs for free.
 
 - Daily country extracts from [Geofabrik.de](http://download.geofabrik.de/asia/india.html) 

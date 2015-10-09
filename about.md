@@ -1,6 +1,6 @@
 ---
 layout: default
-title: About OSM INDIA
+title: About
 ---
 
 # Openstreetmap India
