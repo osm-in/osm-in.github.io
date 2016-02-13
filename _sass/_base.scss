@@ -36,7 +36,7 @@ body {
 }
 
 //Header
-header {
+header.site {
     background-color: #2c2a2a;
     height: 48px;
     width: 100%;
@@ -299,4 +299,8 @@ pre {
             fill: $grey-color;
         }
     }
+}
+
+li h2{
+  margin: 0;
 }
