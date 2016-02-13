@@ -1,11 +1,12 @@
 ---
-layout: page
+layout: default
 title: About
-permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
-
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+# About
+<p><b>Welcome to OpenStreetMap India.</b> OpenStreetMap is the free editable map of the world.
+<ul>
+<li>Join the conversation in India on <a href="https://lists.openstreetmap.org/listinfo/talk-in">talk-in</a></li>
+<li><a href="https://github.com/geohacker/openstreetmap.in#using-this-map">Learn how to use this map</a></li>
+<li><a href="http://learnosm.org/">Join the project and edit the map</a></li>
+</p>
