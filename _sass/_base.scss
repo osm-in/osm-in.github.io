@@ -101,23 +101,11 @@ ul.links {
         #map {
             position: absolute;
             top: 50px;
-            bottom: 30px;
+            bottom: 0;
             width: 100%;
         }
-        
-        .intro {
-            z-index: 1;
-            top: 10px;
-            right: 50px;
-            position: absolute;
-            box-sizing: border-box;
-            box-shadow: 3px 3px 3px #BCBABA;
-            background: #f9f9f9;
-            border-radius: 5px;
-            padding: 10px;
-            width: 500px;
-            opacity: 0.9;
-        }
+
+
 //Content
 .content {
     padding-top: 30px;
