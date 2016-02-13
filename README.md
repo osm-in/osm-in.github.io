@@ -4,7 +4,7 @@
 
 # Using this map
 
-The map style is hosted on mapbox.com and is on [OSM Lab](https://github.com/osmlab/india.tm2). You are free to use this map in your project. The tile scheme is `https://{a,b,c}.tiles.mapbox.com/v4/openstreetmap.1b68f018/z/x/y.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q`
+The map style is hosted on mapbox.com and is on [OSM Lab](https://github.com/osmlab/india.tm2). You are free to use this map in your personal project. The tile scheme is `https://{a,b,c}.tiles.mapbox.com/v4/openstreetmap.1b68f018/z/x/y.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q`
 
 * Map ID - `openstreetmap.1b68f018`
 * Access Token - `pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q`
