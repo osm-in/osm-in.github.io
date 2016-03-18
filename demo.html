@@ -97,10 +97,6 @@ Object.keys(languages).forEach(function(lang) {
     addButton(lang, languages[lang], lang);
 });
 
-for(var i = 0; i < toggles.length; i++) {
-    var toggle = toggles[i];
-    toggle.addEventListener('click', toggleMode.bind(toggle, toggle.value));
-}
 
 // Switch the language field for the target layer
 function setLanguage(language) {
