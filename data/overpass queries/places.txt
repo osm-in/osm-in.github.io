@@ -1,0 +1,2 @@
+// Extract Indic language places
+http://overpass-turbo.eu/s/f5N

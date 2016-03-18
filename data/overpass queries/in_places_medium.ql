@@ -1,0 +1,1 @@
+[out:json][timeout:25];(node["place"~"^(district|town|suburb)+"][~"^name:(ml|kn|te|ta|bn|hi)+$"~"^.*"](4.915832801313178,60.029296875,39.774769485295465,100.1953125);)->.places;out body;>;out skel qt;
