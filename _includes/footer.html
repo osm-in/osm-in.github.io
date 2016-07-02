@@ -5,3 +5,13 @@
         </li>
     </ul>
 </footer> -->
+ <!-- Addons -->
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+  $( document ).ready(function() {
+    $('.burger-menu-trigger').click(function(){
+      $(this).toggleClass('is-active');
+      $('.osm-header__links__menu').toggleClass('is-open');
+    });
+});
+</script>

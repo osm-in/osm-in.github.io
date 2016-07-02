@@ -1,0 +1,14 @@
+$brand-primary:         #388267;
+$brand-secondary:       #9DC5EC;
+
+$white:                 #FFFFFF;
+$black:                 #000000;
+$green:                 #9DCC92;
+// Grays
+$gray-darker:            lighten($black, 13.5%) !default; // #222
+$gray-dark:              lighten($black, 20%) !default;   // #333
+$gray:                   lighten($black, 33.5%) !default; // #555
+$gray-light:             lighten($black, 60%) !default;   // #999
+$gray-lighter:           lighten($black, 80%) !default; // #eee
+$gray-lightest:          lighten($black, 90%) !default; // #eee
+

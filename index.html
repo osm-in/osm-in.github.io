@@ -4,12 +4,12 @@ map: raster
 title: OpenStreetMap India
 ---
 
-<article class="{{page.map}}">
+<section class="map-container {{page.map}}">
 
   <div id='map'></div>
 
-</article>
-
+</section>
+<a href="http://www.openstreetmap.org/edit" title="Edit OSM" class="edit-map"> Edit map </a>
 <script>
     // Lock to India bounds
     var southWest = L.latLng(7.319, 61.523),
