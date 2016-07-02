@@ -1,0 +1,25 @@
+.event {
+  &:after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20%;
+    margin: 20px 0;
+    background-color: $gray-dark;
+  }
+}
+.event-headline {
+  font-weight: $bold;
+  a {
+    text-decoration: none;
+  }
+}
+.event-meta {
+  color: $gray;
+  font-size: em(14);
+}
+.event-description {
+  font-size: em(16);
+  line-height: em(18, 16);
+  margin-top: 10px;
+}
