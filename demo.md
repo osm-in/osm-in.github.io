@@ -2,6 +2,7 @@
 layout: map
 map: gl
 title: OpenStreetMap India - WebGL Demo
+permanlink: /demo/
 ---
 
 <style>
@@ -14,21 +15,26 @@ title: OpenStreetMap India - WebGL Demo
     }
 
     #languages li {
-        color: #ddd;
+        color: #fff;
         margin: 3px;
         float: left;
-        background-color: #3887be;
+        background-color: green;
         padding: 7px;
+        cursor: pointer;
+        font-size: 14px;
+        opacity: 0.5;
     }
 
     #languages li:hover {
       color: white;
       background-color: black;
+      opacity: 1;
     }
 
     #languages li.activeLanguage {
         background-color: black;
         color: white;
+        opacity: 1;
     }
 
     #languages em {
