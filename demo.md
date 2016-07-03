@@ -2,7 +2,7 @@
 layout: map
 map: gl
 title: OpenStreetMap India - WebGL Demo
-permanlink: /demo/
+permalink: /demo/
 ---
 
 <style>
