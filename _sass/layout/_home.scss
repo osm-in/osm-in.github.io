@@ -1,0 +1,11 @@
+.edit-map {
+  display: block;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background-color: $green;
+  color: $white;
+  border-radius: 4px;
+  padding: 5px 10px;
+  z-index: $zIndex-1;
+}

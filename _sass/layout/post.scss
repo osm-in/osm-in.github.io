@@ -1,0 +1,13 @@
+.post-title {
+  display: inline-block;
+}
+.post-meta {
+  color: $gray;
+  font-style: italic;
+  font-size: em(14);
+}
+.post-content {
+  img {
+    width: 100%;
+  }
+}

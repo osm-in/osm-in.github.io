@@ -4,12 +4,14 @@ title:  "Starting the Bengaluru tree survey"
 categories: events
 event_date: 2016-02-14
 event_venue: "Hasgeek House, Bengaluru"
+
 ---
-A small group of us are experimenting with a citizen led tree survey in Indiranagar, Bengaluru. 
+A small group of us are experimenting with a citizen led tree survey in Indiranagar, Bengaluru.
 
 - **Date** Sunday, 14th February
 - **Time** 10AM - 2PM
 - **Location** [Hasgeek House](https://hasgeek.com), #2699, 19th Main, 5th Cross, Indiranagar HAL 2nd Stage, Bangalore. ([Map](https://www.openstreetmap.org/node/3383897326#map=18/12.96105/77.64491))
+
 
 ![](http://wiki.openstreetmap.org/w/images/1/17/Bengaluru_Indiranagar_tree_mapping_party.gif)
 

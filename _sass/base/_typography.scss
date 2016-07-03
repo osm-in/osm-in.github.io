@@ -1,0 +1,98 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+$sans: 'Open Sans',Helvetica, Arial, sans-serif;
+$serif: 'gerogia', serif;
+
+$primary-typeface: $sans;
+$secondary-typeface: $serif;
+
+
+$base:      16px;
+$mobbase:   8px;
+$line:      1.5;
+
+$fontsize-smaller:    11;
+$fontsize-small:      13;
+$fontsize-base:       16;
+$fontsize-medium:     18;
+$fontsize-large:      21;
+$fontsize-larger:     24;
+$fontsize-largest:    29;
+$fontsize-halfjumbo:  29;
+$fontsize-jumbo:      68;
+
+// Font weights ----------------------------------
+$regular: 400;
+$bold: 700;
+
+
+// ---------------------------------------------
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: $sans;
+  font-weight: 400;
+  font-size: em($fontsize-base);
+  line-height: $line;
+  text-rendering: optimizeLegibility;
+
+  @include breakpoint($pc) {
+    font-size: em(18);
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol {
+  font-weight: normal;
+  margin: 0;
+}
+
+h1 {
+  font-size: em($fontsize-jumbo);
+  line-height: em(90, $fontsize-jumbo);
+  font-weight: $bold;
+}
+
+h2 {
+  font-size: em($fontsize-halfjumbo);
+  line-height: em(40, $fontsize-halfjumbo);
+  padding: em(24, $fontsize-halfjumbo) 0 em(16, $fontsize-halfjumbo);
+  font-family: $primary-typeface;
+}
+
+h3 {
+  font-size: em($fontsize-largest);
+  line-height: em(36, $fontsize-largest);
+  word-break: normal;
+  font-family: $primary-typeface;
+}
+
+h4 {
+  font-size: em($fontsize-larger);
+  line-height: em(32, $fontsize-larger);
+  font-weight: $bold;
+}
+
+h5 {
+  font-size: em($fontsize-medium);
+  line-height: em(24, $fontsize-medium);
+  font-weight: $bold;
+}
+
+h6 {
+  font-size: em($fontsize-small);
+  line-height: em(16, $fontsize-small);
+}
+
+p {
+  font-family: $primary-typeface;
+  font-size: em(16);
+  line-height: em(26, 16);
+  font-weight: $regular;
+
+  @include breakpoint($tablet) {
+    font-size: em(18);
+    line-height: em(29, 18);
+  }
+}

@@ -10,11 +10,7 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
 
-  <!-- Addons -->
-  <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
-  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-
-  <!-- Choose correct map libraries for standard or GL map -->
+    <!-- Choose correct map libraries for standard or GL map -->
   {% if page.map == "raster" %}
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
@@ -32,5 +28,4 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.0.0/mapbox-gl-geocoder.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.0.0/mapbox-gl-geocoder.css' type='text/css' />
   {% endif %}
-
 </head>

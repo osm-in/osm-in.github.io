@@ -1,0 +1,25 @@
+.page-title {
+  text-align: left;
+  font-size: em(32);
+  line-height: em(34, 32);
+  text-transform: uppercase;
+  border-bottom: 2px solid $gray;
+  font-weight: $bold;
+  margin-bottom: 10px;
+  padding: 32px 0 16px;
+}
+
+.content {
+  h2, h3 , p , ul, ol, {
+    padding-top: 10px;
+  }
+
+  ul {
+   list-style: disc;
+  }
+
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
