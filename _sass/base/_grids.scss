@@ -1,0 +1,15 @@
+
+@import "vendor/breakpoint/breakpoint";
+
+$tablet: min-width 750px;
+$pc: min-width 1024px;
+
+.container {
+  max-width: 60em;
+  margin: 0 auto;
+  padding: 0 12px;
+
+  @include breakpoint($tablet) {
+    padding: 0 24px;
+  }
+}

@@ -1,12 +1,13 @@
 ---
-layout: default
+layout: page
 title: About
+permalink: /about/
 ---
 
-# About
-<p><b>Welcome to OpenStreetMap India.</b> OpenStreetMap is the free editable map of the world.
-<ul>
-<li>Join the conversation in India on <a href="https://lists.openstreetmap.org/listinfo/talk-in">talk-in</a></li>
-<li><a href="https://github.com/geohacker/openstreetmap.in#using-this-map">Learn how to use this map</a></li>
-<li><a href="http://learnosm.org/">Join the project and edit the map</a></li>
-</p>
+**Welcome to OpenStreetMap India**
+
+OpenStreetMap is the free editable map of the world founded in 2004 with the aim of creating a citizen created map. We collect data on roads, railways, rivers, forests, homes and everything else that is commonly seen on the ground. All the contributions are open for download and licenses under an open license that allows one to build useful applications and services using the data.
+
+- Interact with the Indian open mapping community on the [talk-in](https://lists.openstreetmap.org/listinfo/talk-in) OSM mailing list
+- Learn [how to use this map](https://github.com/osm-in/openstreetmap.in#using-this-map)
+- Learn [about OpenStreetMap](http://learnosm.org/)

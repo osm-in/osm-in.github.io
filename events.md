@@ -1,14 +1,18 @@
 ---
-layout: default
-title: About
+layout: page
+title: Events
+permalink: /events/
+
 ---
 
-# Events
-<ul>
   {% for event in site.posts %}
-    <li>
-      <h2><a href="{{ event.url }}">{{ event.title }}</a></h2> on {{ event.event_date }} at {{event.event_venue}}<br>
-      {{ event.excerpt }}
-    </li>
+  <article class="event">
+    <h3 class="event-headline">
+      <a href="{{ event.url }}">{{ event.title }}</a>
+    </h3>
+    <span class="event-meta"> on <time>{{ event.event_date }}</time> at {{event.event_venue}} </span>
+
+    <p class="event-description">{{ event.excerpt }}</p>
+  </article>
   {% endfor %}
-</ul>
+
