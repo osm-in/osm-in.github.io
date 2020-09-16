@@ -1,0 +1,32 @@
+{
+  "name": "openstreetmap.in",
+  "version": "1.0.0",
+  "description": "OpenStreetMap of India",
+  "private": "true",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osm-in/openstreetmap.in.git"
+  },
+  "author": "Arun Ganesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osm-in/openstreetmap.in/issues"
+  },
+  "homepage": "https://github.com/osm-in/openstreetmap.in#readme",
+  "dependencies": {
+    "mapbox-gl-controls": "^1.6.5"
+  },
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
