@@ -2,9 +2,22 @@
 
 import StylesControl from 'mapbox-gl-controls/lib/styles';
 import InspectControl from 'mapbox-gl-controls/lib/inspect';
+let Parser = require('rss-parser');
+let parser = new Parser();
+ 
+(async () => {
+ 
+  let feed = await parser.parseURL('https://osmcha.org/api/v1/aoi/a4b27b2f-cec7-4291-afa2-38e77c863944/changesets/feed/');
+  console.log(feed);
+ 
+  feed.items.forEach(item => {
+    console.log(item.title + ':' + item.link)
+  });
+ 
+})();
 
-mapboxgl.accessToken =
-'pk.eyJ1Ijoib3NtLWluIiwiYSI6ImNqcnVxMTNrNTJwbHc0M250anUyOW81MjgifQ.cZnvZEyWT5AzNeO3ajg5tg';
+
+mapboxgl.accessToken ='pk.eyJ1IjoicGxhbmVtYWQiLCJhIjoiemdYSVVLRSJ9.g3lbg_eN0kztmsfIPxa9MQ';
 
 var map = new mapboxgl.Map({
 container: 'map',
@@ -25,8 +38,8 @@ map.addControl(
 map.addControl(new StylesControl({
   styles: [
     {
-      label: 'Streets India',
-      styleName: 'Mapbox Streets',
+      label: 'Streetsasa India',
+      styleName: 'Streets India',
       styleUrl: 'mapbox://styles/planemad/ckf4xcet7231819mm2e8njlca',
     }, {
       label: 'Satellite',
@@ -49,6 +62,7 @@ map.fitBounds([
 map.on('load', function () {
     // Show country boundaries as per Government of India
     filterBoundaries();
+
 });
 
 function filterBoundaries() {
