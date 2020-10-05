@@ -7,7 +7,7 @@
     "example": "examples"
   },
   "scripts": {
-   "start": "webpack-dev-server --open --watch",
+    "start": "webpack-dev-server --open --watch",
     "build": "webpack --mode production",
     "watch": "webpack --watch --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,14 +25,15 @@
   "dependencies": {
     "mapbox-gl-controls": "^1.6.5",
     "rss-parser": "^3.9.0",
-    "rss-to-json": "^1.1.1",
-    "xml2js": "^0.4.23"
+    "rss-to-json": "^1.1.1"
   },
   "devDependencies": {
+    "@turf/bbox-polygon": "^6.0.1",
     "browserify-livereload": "^1.0.10",
     "watchify": "^3.11.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "xml2js": "^0.4.23"
   }
 }

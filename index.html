@@ -12,13 +12,12 @@
 
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js">
     </script>
-    <link rel="stylesheet"
-      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
-      type="text/css" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+      rel="stylesheet" />
 
     <link href="https://raw.githack.com/bravecow/mapbox-gl-controls/master/theme.css" rel="stylesheet">
 
-        <!-- UIkit CSS -->
+    <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
 
     <!-- UIkit JS -->
@@ -72,20 +71,26 @@
           <p>Join the volunteer community of citizens crowdsourcing a free and open source map of India using the <a
               href='https://www.openstreetmap.org/export#map=15/18.9325/72.8407'>OpenStreetMap Project</a>.
           </p>
+          <p>
+            <a href="https://www.openstreetmap.org/edit?editor=id#map=5/23.021/82.542"><button id='edit-map' class="uk-button uk-button-primary uk-button-small" type="button">Edit the
+              map</button></a>
 
+              <a href="https://wiki.openstreetmap.org/wiki/India"><button class="uk-button uk-button-default uk-button-small" type="button">Wiki Documentation</button></a>
+
+          </p>
 
           <p>
             <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/d6n29CU2-Sg" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen uk-responsive></iframe>
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen uk-responsive></iframe>
           </p>
-          <p>            <button class="uk-button uk-button-default uk-button-small" type="button"
-            uk-toggle="target: #modal-about">About OpenStreetMap</button>
+          <p> <button class="uk-button uk-button-default uk-button-small" type="button"
+              uk-toggle="target: #modal-about">About OpenStreetMap</button>
 
             <button class="uk-button uk-button-default uk-button-small" type="button"
-            uk-toggle="target: #modal-download">Download Map Data</button>
+              uk-toggle="target: #modal-download">Download India Data</button>
 
-        </p>
+          </p>
 
 
           <div class="uk-card uk-card-primary uk-card-body uk-width-1-1 uk-padding-small">
@@ -100,16 +105,19 @@
                   class="uk-button uk-button-default uk-button-small">Recent edits</button></a>
 
             </p>
-            <a class="twitter-timeline" data-height="400" data-dnt="true" href="https://twitter.com/osm_in?ref_src=twsrc%5Etfw">Latest</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  
+            <a class="twitter-timeline" data-height="400" data-dnt="true"
+              href="https://twitter.com/osm_in?ref_src=twsrc%5Etfw">Latest</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
           </div>
 
-          <footer><p>
-            <a href='https://wiki.openstreetmap.org/wiki/India'>OpenStreetMap India Wiki</a> |
+          <footer>
+            <p>
+              <a href='https://wiki.openstreetmap.org/wiki/India'>OpenStreetMap India Wiki</a> |
 
-            <a href='https://t.me/OSMIndia'>OSM India Telegram</a> |
-            <a href='https://github.com/osm-in/openstreetmap.in/'>Github</a>
-          </p>
+              <a href='https://t.me/OSMIndia'>OSM India Telegram</a> |
+              <a href='https://github.com/osm-in/openstreetmap.in/'>Github</a>
+            </p>
           </footer>
 
         </div>
@@ -161,13 +169,20 @@
       </div>
     </div>
 
-     <!-- This is the modal -->
-     <div id="modal-download" uk-modal>
+    <!-- This is the modal -->
+    <div id="modal-download" uk-modal>
       <div class="uk-modal-dialog uk-modal-body">
         <h2 class="uk-modal-title">Download free India map data</h2>
+        <h3>APIs</h3>
         <ul>
-          <li>Query the live map data for geojson or csv extracts using <a
-              href="https://overpass-turbo.eu/s/YoV">Overpass API</a></li>
+          <li>Query the live map data for geojson or csv extracts using Overpass API
+            <uL>
+              <li><a href="https://overpass-turbo.eu/s/YoV">Bus stops and bus stations in Chennai</a></li>
+            </uL>
+          </li>
+        </ul>
+        <h3>Downloads</h3>
+        <ul>
           <li>Daily India data extract as .osm.pbf or processed shapefiles from <a
               href="https://download.geofabrik.de/asia/india.html">Geofabrik.de</a></li>
           <li>Download raw .osm.xml data from <a
@@ -180,19 +195,12 @@
       </div>
     </div>
 
-    <!-- This is the modal -->
-    <div id="modal-schedule" class="uk-modal-container" uk-modal>
-      <div class="uk-modal-dialog uk-modal-body">
-        <a href='https://wiki.openstreetmap.org/wiki/India/Events/Neighbourhood_mapping_party_-_QikPik' class='btn'>
-          <h2 class="uk-modal-title">Event Details</h2>
-        </a>
-        <div id="wiki-schedule"></div>
-        <p class="uk-text-right">
-          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-        </p>
-      </div>
-    </div>
 
+    <script>
+      function editMap() {
+        console.log(this)
+      }
+    </script>
     <script src="./dist/main.js"></script>
 
   </body>
