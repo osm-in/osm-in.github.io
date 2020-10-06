@@ -24,16 +24,17 @@
   "homepage": "https://github.com/osm-in/openstreetmap.in#readme",
   "dependencies": {
     "mapbox-gl-controls": "^1.6.5",
+    "moment": "^2.29.0",
     "rss-parser": "^3.9.0",
-    "rss-to-json": "^1.1.1"
+    "timediff": "^1.1.1",
+    "xml2js": "^0.4.23",
+    "@turf/bbox-polygon": "^6.0.1"
   },
   "devDependencies": {
-    "@turf/bbox-polygon": "^6.0.1",
     "browserify-livereload": "^1.0.10",
     "watchify": "^3.11.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "xml2js": "^0.4.23"
+    "webpack-dev-server": "^3.11.0"
   }
 }

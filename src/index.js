@@ -1,19 +1,17 @@
 'use strict'
 
 import StylesControl from 'mapbox-gl-controls/lib/styles';
-import InspectControl from 'mapbox-gl-controls/lib/inspect';
 import bboxPolygon from '@turf/bbox-polygon';
 
 let parseString = require('xml2js').parseString;
 let Parser = require('rss-parser');
 let parser = new Parser();
+var moment = require('moment')
 
 var changesetsGeojson = ({
     "type": "FeatureCollection",
     "features": []
 })
-
-
 
 //
 // Create OpenStreetMap Map using Mapbox GL vector tiles 
@@ -106,7 +104,10 @@ map.on('load', function () {
     filterBoundaries();
 
     // Add custom layers
-    loadMapLayers();
+    addMapLayers();
+
+    // Add map interactions
+    addMapEvents()
 
 });
 
@@ -114,7 +115,7 @@ map.on('load', function () {
 // Map functions
 //
 
-function loadMapLayers() {
+function addMapLayers() {
 
     // Map data sources
 
@@ -129,12 +130,85 @@ function loadMapLayers() {
 
     map.addLayer({
         id: 'changesets',
+        type: "fill",
+        source: 'changesets',
+        paint: {
+            "fill-color": "red",
+            "fill-opacity": .1
+        }
+    });
+    map.addLayer({
+        id: 'changesets outline',
         type: "line",
         source: 'changesets',
         paint: {
             "line-color": "red",
             "line-width": 2
         }
+    });
+
+}
+
+// Map events
+
+function addMapEvents() {
+
+    // Change the cursor to a pointer when the mouse is over the places layer.
+    map.on('mouseenter', 'changesets', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'changesets', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+
+    // When a click event occurs on a feature in the csvData layer, open a popup at the
+    // location of the feature, with description HTML from its properties.
+    map.on('click', 'changesets', function (e) {
+
+        console.log(e.features)
+        const feature = e.features[0];
+        var coordinates = e.lngLat.toArray();
+
+        var lng = e.lngLat.lng;
+        var lat = e.lngLat.lat;
+
+
+        // console.log(moment("20111031", "YYYYMMDD").fromNow())
+
+
+        // Generate bbox from point coords
+        var buffer = 0.05;
+        var bbox_osmcha = [lng + buffer, lat - buffer, lng - buffer, lat + buffer].join(
+            ',');
+        var bbox_wsen = [lng - buffer, lat - buffer, lng + buffer, lat + buffer].join(
+            ',');
+
+        var description = `<b>${feature.properties.changes}</b> changes by ${feature.properties.user}`;
+        description += `<p>${feature.properties.comment}</p>`;
+        description +=
+            `<br><a href='https://osmcha.org/filters?filters={"in_bbox":[{"label":"${bbox_osmcha}","value":"${bbox_osmcha}"}],"area_lt":[{"label":"10","value":"10"}]}'>Check neighbourhood acitivy with OSMCha</a>`
+        description +=
+            `<br><a href='https://www.openstreetmap.org/history#map=14/${e.lngLat.lat}/${e.lngLat.lng}'>OSM History</a>`;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        //add Popup to map
+
+        document.getElementById('map-overlay').innerHTML = description;
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
     });
 
 }
@@ -166,16 +240,25 @@ function filterBoundaries() {
             .then(str => {
                 parseString(str, function (err, result) {
 
+
                     const changesetMetadata = result.osm.changeset[0].$
-                    const poly = bboxPolygon([changesetMetadata.min_lon, changesetMetadata.min_lat, changesetMetadata.max_lon, changesetMetadata.max_lat])
+                    const changesetPolygon = bboxPolygon([changesetMetadata.min_lon, changesetMetadata.min_lat, changesetMetadata.max_lon, changesetMetadata.max_lat])
 
-                    poly.properties = result.osm.changeset[0];
+                    console.log(result.osm.changeset)
+                    changesetPolygon.properties = ({
+                        title: item.title,
+                        user: result.osm.changeset[0].$.user,
+                        'edit-count': result.osm.changeset[0].tag[0].$.v,
+                        timestamp: result.osm.changeset[0].$.closed_at,
+                        changes: result.osm.changeset[0].$.changes_count,
+                        comment: result.osm.changeset[0].tag.slice(-1)[0].$.v,
+                    })
 
-                    changesetsGeojson.features.push(poly);
-                    map.getSource('changesets').setData(changesetsGeojson);
-
+                    changesetsGeojson.features.push(changesetPolygon);
 
                 });
+            }).finally(e => {
+                map.getSource('changesets').setData(changesetsGeojson);
             })
     });
 
