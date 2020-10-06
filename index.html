@@ -72,10 +72,12 @@
               href='https://www.openstreetmap.org/export#map=15/18.9325/72.8407'>OpenStreetMap Project</a>.
           </p>
           <p>
-            <a href="https://www.openstreetmap.org/edit?editor=id#map=5/23.021/82.542"><button id='edit-map' class="uk-button uk-button-primary uk-button-small" type="button">Edit the
-              map</button></a>
+            <a href="https://www.openstreetmap.org/edit?editor=id#map=5/23.021/82.542"><button id='edit-map'
+                class="uk-button uk-button-primary uk-button-small" type="button">Edit the
+                map</button></a>
 
-              <a href="https://wiki.openstreetmap.org/wiki/India"><button class="uk-button uk-button-default uk-button-small" type="button">Wiki Documentation</button></a>
+            <a href="https://wiki.openstreetmap.org/wiki/India"><button
+                class="uk-button uk-button-default uk-button-small" type="button">Wiki Documentation</button></a>
 
           </p>
 
@@ -161,6 +163,8 @@
           <li>Yatra.com</li>
           <li>NHAI-National Highways Authority of India</li>
           <li><a href='https://wiki.openstreetmap.org/wiki/Mapathon_Keralam'>Kerala State IT Mission</a></li>
+          <li><a href='https://onemapggm.mcg.gov.in/citizenportal/'>OneMap Gurugram - Municipal Corporation of
+              Gurugram</a></li>
         </ul>
 
         <p class="uk-text-right">
@@ -172,21 +176,35 @@
     <!-- This is the modal -->
     <div id="modal-download" uk-modal>
       <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Download free India map data</h2>
-        <h3>APIs</h3>
+        <h2 class="uk-modal-title">Using OpenStreetMap India map data</h2>
+<p>OpenStreetMap data is available for free download and use per <a href='https://www.openstreetmap.org/copyright'>Open Data Commons Open Database License (ODbL)</a>. Various data download and export formats based on user needs. Check the <a href='https://wiki.openstreetmap.org/wiki/Downloading_data'>wiki for more details.</a></p>
+
+        <img src='./img/vivekananda-rock-memorial-map-data.gif'>
+        <h3>Download free India map data</h3>
+        <h4>APIs</h4>
         <ul>
-          <li>Query the live map data for geojson or csv extracts using Overpass API
+          <li>Query the live map data for specific objects using Overpass API. Updated minutely. `.geojson` `.csv`
+            `.gpx` `google earth .kml`
             <uL>
               <li><a href="https://overpass-turbo.eu/s/YoV">Bus stops and bus stations in Chennai</a></li>
+              <li><a href="http://overpass-turbo.eu/s/YJB">All forts and castles in india</a></li>
             </uL>
           </li>
         </ul>
-        <h3>Downloads</h3>
+        <h4>Downloads</h4>
         <ul>
-          <li>Daily India data extract as .osm.pbf or processed shapefiles from <a
-              href="https://download.geofabrik.de/asia/india.html">Geofabrik.de</a></li>
-          <li>Download raw .osm.xml data from <a
-              href="https://www.openstreetmap.org/export#map=15/18.9325/72.8407">OSM.org</a></li>
+          <li>Request custom data extracts from <a href="https://export.hotosm.org/en/v3/">Humanitarian OpenStreetMap
+              Team (HOTOSM)</a>. Updated 2-3 days. `geopackage .gpkg` `shapefiles .shp` `garmin .img` `google earth
+            .kml` `.mbtiles` `maps.me .mwm` `osmand .obf`</li>
+          <li>India OSM data extract from <a href="https://download.geofabrik.de/asia/india.html">Geofabrik.de</a>.
+            Updated daily. `osm pbf` `shapefiles`</li>
+          <li>Raw OSM data from <a href="https://www.openstreetmap.org/export#map=15/18.9325/72.8407">OSM.org</a>.
+            Limited area. Updated minutely. `osm xml`</li>
+          <li>Administrative boundaries clipped to land area from <a href="https://osm-boundaries.com/Map">OSM
+              Boundaries</a>. Updated monthly. `.geojson`</li>
+          <li>Snapshot of full India outline as per Survey of India from <a
+              href="https://github.com/datameet/maps/blob/master/Country/india-osm.geojson">Datameet Maps</a>. Limited
+            area. Not updated. `.geojson`</li>
         </ul>
 
         <p class="uk-text-right">
