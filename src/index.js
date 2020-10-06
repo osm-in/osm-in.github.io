@@ -8,10 +8,10 @@ let parseString = require('xml2js').parseString;
 let Parser = require('rss-parser');
 let parser = new Parser();
 
-var changesetsGeojson=({
+var changesetsGeojson = ({
     "type": "FeatureCollection",
     "features": []
-  })
+})
 
 
 
@@ -37,23 +37,24 @@ var map = new mapboxgl.Map({
 // Style controls
 map.addControl(new StylesControl({
     styles: [{
-        label: 'Streets',
-        styleName: 'Streets India',
-        styleUrl: 'mapbox://styles/planemad/ckf4xcet7231819mm2e8njlca',
-    },
-    {
-        label: 'Railways',
-        styleName: 'Rail World',
-        styleUrl: 'mapbox://styles/planemad/ck7p3wxmp0q571imu99elwqs1',
-    }, {
-        label: 'Waterways',
-        styleName: 'Water Flow',
-        styleUrl: 'mapbox://styles/planemad/ckd42fwa20n531iqrewerwla1',
-    },{
-        label: 'Satellite',
-        styleName: 'Satellite',
-        styleUrl: 'mapbox://styles/mapbox/satellite-streets-v10',
-    }, ],
+            label: 'Streets',
+            styleName: 'Streets India',
+            styleUrl: 'mapbox://styles/planemad/ckf4xcet7231819mm2e8njlca',
+        },
+        {
+            label: 'Railways',
+            styleName: 'Rail World',
+            styleUrl: 'mapbox://styles/planemad/ck7p3wxmp0q571imu99elwqs1',
+        }, {
+            label: 'Waterways',
+            styleName: 'Water Flow',
+            styleUrl: 'mapbox://styles/planemad/ckd42fwa20n531iqrewerwla1',
+        }, {
+            label: 'Satellite',
+            styleName: 'Satellite',
+            styleUrl: 'mapbox://styles/mapbox/satellite-streets-v10',
+        },
+    ],
     onChange: (style) => filterBoundaries(),
 }), 'top-left');
 
@@ -62,13 +63,13 @@ map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 // Add geolocate control to the map.
 map.addControl(
-  new mapboxgl.GeolocateControl({
-    positionOptions: {
-      enableHighAccuracy: true
-    },
-    trackUserLocation: true
-  }),
-  'bottom-right'
+    new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true
+    }),
+    'bottom-right'
 );
 
 // Add Mapbox Geocoder
@@ -91,9 +92,8 @@ map.fitBounds([
 ]);
 
 // Edit the OSM map at the location
-// TODO: This should open id editor at map location
 document.getElementById('edit-map').onclick = function () {
-    window.open("https://www.osm.org")
+    window.open(`https://www.openstreetmap.org/edit?editor=id#map=${map.getZoom()}/${map.getCenter().lngLat.lat}/${map.getCenter().lngLat.lng}`)
 }
 
 //
@@ -116,27 +116,26 @@ map.on('load', function () {
 
 function loadMapLayers() {
 
-  // Map data sources
+    // Map data sources
 
-  map.addSource('changesets', {
-    type: "geojson",
-    generateId: true,
-    data: changesetsGeojson
-  });
+    map.addSource('changesets', {
+        type: "geojson",
+        generateId: true,
+        data: changesetsGeojson
+    });
 
 
-  // Map layers
+    // Map layers
 
-  map.addLayer({
-    id: 'changesets',
-    type: "line",
-    source: 'changesets',
-    paint: {
-      "line-color": "red",
-      "line-width": 2
-    }
-  }
-);
+    map.addLayer({
+        id: 'changesets',
+        type: "line",
+        source: 'changesets',
+        paint: {
+            "line-color": "red",
+            "line-width": 2
+        }
+    });
 
 }
 
@@ -167,17 +166,15 @@ function filterBoundaries() {
             .then(str => {
                 parseString(str, function (err, result) {
 
-                    const changesetMetadata=result.osm.changeset[0].$
-                     const poly = bboxPolygon([changesetMetadata.min_lon,changesetMetadata.min_lat,changesetMetadata.max_lon,changesetMetadata.max_lat])
-                    
-                    poly.properties=result.osm.changeset[0];
+                    const changesetMetadata = result.osm.changeset[0].$
+                    const poly = bboxPolygon([changesetMetadata.min_lon, changesetMetadata.min_lat, changesetMetadata.max_lon, changesetMetadata.max_lat])
 
-                    console.log(poly);
+                    poly.properties = result.osm.changeset[0];
 
                     changesetsGeojson.features.push(poly);
                     map.getSource('changesets').setData(changesetsGeojson);
 
-                    
+
                 });
             })
     });

@@ -67,20 +67,21 @@
             <h2 class='uk-margin-remove-bottom'><img style='width:40px'
                 src='https://wiki.openstreetmap.org/w/images/0/07/OpenStreetMap-India.svg'>OpenStreetMap India</h2>
           </div>
-          <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Phwrgb16oEM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
           <p>Join the volunteer community of citizens crowdsourcing a free and open source map of India using the <a
               href='https://www.openstreetmap.org/export#map=15/18.9325/72.8407'>OpenStreetMap Project</a>.
           </p>
           <p>
-            <a href="https://www.openstreetmap.org/edit?editor=id#map=5/23.021/82.542"><button id='edit-map'
-                class="uk-button uk-button-primary uk-button-small" type="button">Edit the
-                map</button></a>
-
+            <button id='edit-map' class="uk-button uk-button-primary uk-button-small" type="button"><span
+                uk-icon="pencil"></span> Edit the
+              map</button>
             <a href="https://wiki.openstreetmap.org/wiki/India"><button
-                class="uk-button uk-button-default uk-button-small" type="button">Wiki Documentation</button></a>
+                class="uk-button uk-button-default uk-button-small" type="button"><span uk-icon="file-edit"></span>
+                Mapping wiki</button></a>
+            <a href="https://community.osm.be/resources/asia/india"><button
+                class="uk-button uk-button-default uk-button-small" type="button"><span uk-icon="users"></span> Join
+                community</button></a>
 
           </p>
-
           <p>
             <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/d6n29CU2-Sg" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -91,10 +92,7 @@
 
             <button class="uk-button uk-button-default uk-button-small" type="button"
               uk-toggle="target: #modal-download">Download India Data</button>
-
           </p>
-
-
           <div class="uk-card uk-card-primary uk-card-body uk-width-1-1 uk-padding-small">
             <p>
               Explore recent mapping activity in India<br>
@@ -105,18 +103,15 @@
               <a
                 href='https://resultmaps.neis-one.org/osm-suspicious?country=124&hours=48&tsearch=&mappingdays=50&comp=%3E&value=10&action=d&obj=n&filterkey=#5/18.646/77.124'><button
                   class="uk-button uk-button-default uk-button-small">Recent edits</button></a>
-
             </p>
             <a class="twitter-timeline" data-height="400" data-dnt="true"
               href="https://twitter.com/osm_in?ref_src=twsrc%5Etfw">Latest</a>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
           </div>
 
           <footer>
             <p>
               <a href='https://wiki.openstreetmap.org/wiki/India'>OpenStreetMap India Wiki</a> |
-
               <a href='https://t.me/OSMIndia'>OSM India Telegram</a> |
               <a href='https://github.com/osm-in/openstreetmap.in/'>Github</a>
             </p>
@@ -177,9 +172,15 @@
     <div id="modal-download" uk-modal>
       <div class="uk-modal-dialog uk-modal-body">
         <h2 class="uk-modal-title">Using OpenStreetMap India map data</h2>
-<p>OpenStreetMap data is available for free download and use per <a href='https://www.openstreetmap.org/copyright'>Open Data Commons Open Database License (ODbL)</a>. Various data download and export formats based on user needs. Check the <a href='https://wiki.openstreetmap.org/wiki/Downloading_data'>wiki for more details.</a></p>
-
         <img src='./img/vivekananda-rock-memorial-map-data.gif'>
+        <p>OpenStreetMap data is available for free download and use per <a
+            href='https://www.openstreetmap.org/copyright'>Open Data Commons Open Database License (ODbL)</a>. Various
+          data download and export formats based on user needs. Check the <a
+            href='https://wiki.openstreetmap.org/wiki/Downloading_data'>wiki for more details.</a></p>
+        <p>For a map in Indic languages, check the <a href='https://osm-in.github.io/indic-map/'>Indic OpenStreetMap
+            demo</a> and the <a href='https://wiki.openstreetmap.org/wiki/Map_internationalization_(India)'>wiki</a> for
+          more resources for local language maps</p>
+
         <h3>Download free India map data</h3>
         <h4>APIs</h4>
         <ul>
