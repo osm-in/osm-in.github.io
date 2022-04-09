@@ -24,7 +24,7 @@
   "homepage": "https://github.com/osm-in/openstreetmap.in#readme",
   "dependencies": {
     "mapbox-gl-controls": "^1.6.5",
-    "moment": "^2.29.0",
+    "moment": "^2.29.2",
     "rss-parser": "^3.9.0",
     "timediff": "^1.1.1",
     "xml2js": "^0.4.23",
