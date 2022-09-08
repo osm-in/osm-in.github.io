@@ -18,7 +18,8 @@ var changesetsGeojson = ({
 // https://docs.mapbox.com/vector-tiles/reference/mapbox-streets-v8/
 //
 
-mapboxgl.accessToken = 'pk.eyJ1IjoicGxhbmVtYWQiLCJhIjoiemdYSVVLRSJ9.g3lbg_eN0kztmsfIPxa9MQ';
+// Mapbox Account `osmindia`
+mapboxgl.accessToken = 'pk.eyJ1Ijoib3NtaW5kaWEiLCJhIjoiY2w3dDdvNG9jMDAxNjN1cGlpdGczZjR0cyJ9.TZUuaJdTy2l99xKekZP0fA';
 
 var map = new mapboxgl.Map({
     container: 'map',
