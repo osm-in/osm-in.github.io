@@ -7,7 +7,7 @@
 
     <title>OpenStreetMap India</title>
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
@@ -16,8 +16,6 @@
     </script>
     <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
       rel="stylesheet" />
-
-    <link href="https://raw.githack.com/bravecow/mapbox-gl-controls/master/theme.css" rel="stylesheet" type="text/css">
 
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
@@ -53,6 +51,13 @@
       #map-overlay {
         z-index: 10;
         visibility: hidden;
+      }
+
+      .mapboxgl-ctrl-styles button {
+        width: auto;
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
       }
     </style>
   </head>
