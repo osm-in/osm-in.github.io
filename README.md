@@ -1,5 +1,7 @@
 # OpenStreetMap of India
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6b48ea57-0809-4bb8-afc0-b6c627567e48/deploy-status)](https://app.netlify.com/sites/precious-muffin-a131ac/deploys)
+
 Homepage for the publicly edited street map of India using the [OpenStreetMap project](https://www.openstreetmap.org/#map=5/21.923/79.937).
 
 ## Using the map
