@@ -27,6 +27,11 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
 
+    <!-- Mastodon Embed -->
+    <!-- https://gitlab.com/idotj/mastodon-embed-feed-timeline -->
+    <link rel="stylesheet" href="src/mastodon-timeline.min.css" />
+    <script async src="src/mastodon-timeline.min.js"></script>
+
     <style>
       #map {
         height: 100vh;
@@ -117,9 +122,12 @@
                 href='https://metrics.improveosm.org/navigable-roads/total-metrics-per-interval?duration=monthly&locationType=country&locationId=99&unit=km&from=2016-02-14&to=2021-10-03'><button
                   class="uk-button uk-button-default uk-button-small">Data metrics</button></a>
             </p>
-            <a class="twitter-timeline" data-height="400" data-dnt="true"
-              href="https://twitter.com/osm_in?ref_src=twsrc%5Etfw">Latest</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            <div class="mt-container">
+              <div id="mt-body" class="mt-body" role="feed">
+                <div class="loading-spinner"></div>
+              </div>
+            </div>
           </div>
 
           <footer>
