@@ -10,7 +10,7 @@ Homepage for the publicly edited street map of India using the [OpenStreetMap pr
 
 The India data in the [mapbox-streets](https://docs.mapbox.com/vector-tiles/reference/mapbox-streets-v8/#data-sources--updates) vector tiles (except boundaries) is sourced from OpenStreetMap data. It can take [a couple of weeks](https://stackoverflow.com/a/619621160) for an OSM change to reflect in the vector tiles.
 
-You can use map style [`planemad/ckf4xcet7231819mm2e8njlca`](https://api.mapbox.com/styles/v1/planemad/ckf4xcet7231819mm2e8njlca.html?fresh=true&title=copy&access_token=pk.eyJ1IjoicGxhbmVtYWQiLCJhIjoiemdYSVVLRSJ9.g3lbg_eN0kztmsfIPxa9MQ) for a ready to use OSM base map of India with the corrected borders.
+You can use map style [`planemad/ckf4xcet7231819mm2e8njlca`](https://api.mapbox.com/styles/v1/planemad/ckf4xcet7231819mm2e8njlca.html?fresh=true&title=copy&access_token=pk.eyJ1IjoicGxhbmVtYWQiLCJhIjoiemdYSVVLRSJ9.g3lbg_eN0kztmsfIPxa9MQ) for a ready to use OSM base map of India with borders that reflect Indian government's perspective on the border.
 
 ## Map data
 
