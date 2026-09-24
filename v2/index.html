@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenStreetMap India</title>
+    <meta name="description" content="A community homepage built by embedding a customized Amche Atlas instance.">
+
+    <!--
+        A complete, copy-paste homepage that embeds a customized Amche Atlas
+        instance instead of hosting one. Implements the approach in
+        github.com/osm-in/osm-in.github.io/issues/90.
+
+        Three files, and only one of them is yours to edit:
+
+          index.html       this file - the frame and the page shell
+          site-chrome.js   boilerplate: loads the config, builds the iframe
+                           URL, draws the top-right bar and the menu panel
+          site-chrome.css  boilerplate: how that bar and panel look
+
+          config/index.atlas.json   <- everything specific to your community
+
+        The config file is doing double duty. Amche reads the parts it knows
+        (`map`, `layers`, `atlases`, `name`, `color`) to build the map, and
+        ignores the rest; this page reads the `site` block Amche ignores, and
+        builds its own branding out of it. So a community adopting this
+        forks the folder, rewrites one JSON file, and is done.
+
+        Three things are wired up between the page and the map:
+
+        1. This page -> the atlas. The map is configured through URL
+           parameters (see the URL API guide), and the biggest of those is
+           `atlas`, pointed at config/index.atlas.json sitting next to this
+           file: the layers this map opens with, and the short list of
+           atlases its switcher offers, are ours rather than amche.in's. Any
+           parameter already on this page's own URL wins over the default,
+           which is what makes a shared link reopen the view it was shared from.
+
+        2. The atlas -> this page. An embedded Amche Atlas posts
+           {type: 'url', href} to its parent once the map has loaded and again
+           after every map move. Mirroring that onto this page's address bar
+           keeps the host URL shareable: copy it mid-pan and it reopens exactly
+           where you left it. It is also what lets a menu link like
+           "Edit the map" point at whatever the visitor is currently looking at.
+
+        3. This page -> the atlas, again: posting {type: 'amche:embed', href}
+           into the frame tells the atlas which page it is embedded in, so its
+           own share panel, QR codes and printed exports link back here instead
+           of to amche.in. The atlas falls back to the referrer if this message
+           never arrives, so it is belt and braces rather than required.
+    -->
+    <link rel="stylesheet" href="./site-chrome.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: #0f172a;
+        }
+
+        #atlas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        #placeholder {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font: 0.9rem -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="placeholder">Loading the map…</div>
+
+    <!-- Permissions are not inherited across a cross-origin iframe, so each
+         one the map uses has to be granted here: geolocation to find the
+         visitor, and the motion sensors the compass reads to rotate the map
+         with the device. -->
+    <iframe id="atlas" title="OpenStreetMap India map"
+        allow="geolocation; fullscreen; accelerometer; gyroscope; magnetometer"></iframe>
+
+    <noscript>
+        <p style="color:#e7ebf2;font-family:sans-serif;padding:1rem">
+            This map needs JavaScript. Open
+            <a href="https://amche.in/?atlas=osm" style="color:#ffbf00">amche.in</a> directly instead.
+        </p>
+    </noscript>
+
+    <script type="module" src="./site-chrome.js"></script>
+</body>
+
+</html>

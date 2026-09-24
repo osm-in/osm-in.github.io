@@ -1,0 +1,288 @@
+/*
+ * Boilerplate styling for the site chrome drawn by site-chrome.js.
+ *
+ * The bar copies the embedded atlas's own header - same #111827, same
+ * 1px #1f2937 rule underneath, same 20px content height, same 0.625rem
+ * type and 16px logo - so that covering the right-hand end of that header
+ * reads as one continuous bar rather than as something pasted on top.
+ *
+ * --site-accent is set from the `color` of the atlas config at runtime.
+ */
+
+:root {
+    --site-accent: #7ebc6f;
+    --site-ink: #e5e7eb;
+    --site-dim: #9ca3af;
+    --site-panel: #1f2937;
+    --site-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ------------------------------------------------------------------- bar */
+
+.site-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 20;
+    box-sizing: border-box;
+    height: 21px;
+    /* Wide enough to always hide what it is covering - the embedded atlas's
+       own logo, build badge and menu button - even when this bar is down to
+       a logo and a button itself. */
+    min-width: 124px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0 8px;
+    background: #111827;
+    border-bottom: 1px solid #1f2937;
+    border-left: 1px solid #1f2937;
+    color: #fff;
+    font: 600 0.625rem/1 var(--site-font);
+    letter-spacing: -0.025em;
+}
+
+.site-bar-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.site-bar-link {
+    color: var(--site-dim);
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.site-bar-link:hover {
+    color: var(--site-accent);
+}
+
+.site-brand {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.site-brand:hover {
+    opacity: 0.8;
+}
+
+.site-brand img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.site-burger {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+}
+
+.site-burger:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 640px) {
+
+    .site-bar-links,
+    .site-brand .site-name {
+        display: none;
+    }
+}
+
+/* ----------------------------------------------------------------- panel */
+
+.site-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.site-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 30;
+    box-sizing: border-box;
+    width: 360px;
+    max-width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: var(--site-panel);
+    color: var(--site-ink);
+    font: 400 0.8125rem/1.5 var(--site-font);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.site-panel[hidden],
+.site-backdrop[hidden] {
+    display: none;
+}
+
+.site-panel-head {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--site-accent) 28%, #111827), #111827);
+    border-bottom: 1px solid #374151;
+}
+
+.site-panel-brand {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.site-panel-brand img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.site-close {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: 0;
+    color: var(--site-dim);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.site-close:hover {
+    color: #fff;
+}
+
+.site-panel-body {
+    padding: 16px;
+}
+
+.site-tagline {
+    margin: 0 0 16px;
+    color: var(--site-ink);
+}
+
+.site-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.site-action {
+    padding: 6px 12px;
+    border: 1px solid color-mix(in srgb, var(--site-accent) 50%, transparent);
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--site-accent) 14%, transparent);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.site-action:hover {
+    background: color-mix(in srgb, var(--site-accent) 28%, transparent);
+}
+
+.site-section {
+    margin-bottom: 20px;
+}
+
+.site-section h2 {
+    margin: 0 0 6px;
+    color: var(--site-accent);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.site-section ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-section li {
+    border-top: 1px solid #374151;
+}
+
+.site-item {
+    display: block;
+    padding: 8px 0;
+    color: var(--site-ink);
+    text-decoration: none;
+}
+
+.site-item:hover {
+    color: var(--site-accent);
+}
+
+.site-item .site-label {
+    font-weight: 600;
+}
+
+.site-item .site-note {
+    display: block;
+    color: var(--site-dim);
+    font-size: 0.75rem;
+}
+
+.site-about {
+    margin-bottom: 20px;
+    color: var(--site-dim);
+    font-size: 0.75rem;
+}
+
+.site-foot {
+    padding-top: 12px;
+    border-top: 1px solid #374151;
+    font-size: 0.75rem;
+}
+
+.site-foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.site-foot-link,
+.site-about a,
+.site-credit a {
+    color: var(--site-accent);
+    text-decoration: none;
+}
+
+.site-foot-link:hover,
+.site-about a:hover,
+.site-credit a:hover {
+    text-decoration: underline;
+}
+
+.site-credit {
+    margin: 0;
+    color: var(--site-dim);
+}
