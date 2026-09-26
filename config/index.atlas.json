@@ -145,6 +145,8 @@
     "india"
   ],
   "map": {
+    "style": null,
+    "backgroundColor": "#0b1b2b",
     "center": [
       76.9541,
       10.8293
