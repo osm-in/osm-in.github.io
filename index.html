@@ -1,251 +1,157 @@
-  <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html lang="en">
 
-  <head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenStreetMap India</title>
+    <meta name="description" content="A community homepage built by embedding a customized Amche Atlas instance.">
 
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
-    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+    <!--
+        A complete, copy-paste homepage that embeds a customized Amche Atlas
+        instance instead of hosting one. Implements the approach in
+        github.com/osm-in/osm-in.github.io/issues/90.
 
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js">
-    </script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
-      rel="stylesheet" />
+        Three files, and only one of them is yours to edit:
 
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+          index.html       this file - the frame and the page shell
+          site-chrome.js   boilerplate: loads the config, builds the iframe
+                           URL, draws the top-right bar and the menu panel
+          site-chrome.css  boilerplate: how that bar and panel look
 
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+          config/index.atlas.json   <- everything specific to your community
 
-    <!-- Mastodon Embed -->
-    <!-- https://gitlab.com/idotj/mastodon-embed-feed-timeline -->
-    <link rel="stylesheet" href="src/mastodon-timeline.min.css" />
-    <script async src="src/mastodon-timeline.min.js"></script>
+        The config file is doing double duty. Amche reads the parts it knows
+        (`map`, `layers`, `atlases`, `name`, `color`) to build the map, and
+        ignores the rest; this page reads the `site` block Amche ignores, and
+        builds its own branding out of it. So a community adopting this
+        forks the folder, rewrites one JSON file, and is done.
 
+        Three things are wired up between the page and the map:
+
+        1. This page -> the atlas. The map is configured through URL
+           parameters (see the URL API guide), and the biggest of those is
+           `atlas`, pointed at config/index.atlas.json sitting next to this
+           file: the layers this map opens with, and the short list of
+           atlases its switcher offers, are ours rather than amche.in's. Any
+           parameter already on this page's own URL wins over the default,
+           which is what makes a shared link reopen the view it was shared from.
+
+        2. The atlas -> this page. An embedded Amche Atlas posts
+           {type: 'url', href} to its parent once the map has loaded and again
+           after every map move. Mirroring that onto this page's address bar
+           keeps the host URL shareable: copy it mid-pan and it reopens exactly
+           where you left it. It is also what lets a menu link like
+           "Edit the map" point at whatever the visitor is currently looking at.
+
+        3. This page -> the atlas, again: posting {type: 'amche:embed', href}
+           into the frame tells the atlas which page it is embedded in, so its
+           own share panel, QR codes and printed exports link back here instead
+           of to amche.in. The atlas falls back to the referrer if this message
+           never arrives, so it is belt and braces rather than required.
+    -->
+    <link rel="stylesheet" href="./site-chrome.css">
     <style>
-      #map {
-        height: 100vh;
-      }
-
-      @media only screen and (max-width: 960px) {
-        #map {
-          height: 80vh;
-          margin: 20px;
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: #0f172a;
         }
-      }
 
-      #sidebar {
-        max-height: 100vh;
-        overflow: auto;
-      }
-
-      @media only screen and (max-width: 960px) {
-        #sidebar {
-          max-height: inherit;
-          /* overflow: auto; */
+        #atlas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
-      }
 
-      #map-overlay {
-        z-index: 10;
-        visibility: hidden;
-      }
+        #placeholder {
+            position: fixed;
+            inset: 0;
+            z-index: 15;
+            /* Above the iframe (which is itself z-index: auto, but this stays
+               opaque/on top for as long as it exists regardless), so it fully
+               hides whatever the atlas's own splash is doing underneath while
+               this page's branding is up - see site-chrome.js. */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0f172a;
+            color: #94a3b8;
+            font: 0.9rem -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
 
-      .mapboxgl-ctrl-styles button {
-        width: auto;
-        display: flex;
-        align-items: center;
-        padding: 0 8px;
-      }
+        #placeholder-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        #placeholder-logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            display: none;
+        }
+
+        #placeholder-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e5e7eb;
+        }
+
+        #placeholder-tagline {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            max-width: 320px;
+        }
+
+        #placeholder-spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: placeholder-spin 1s linear infinite;
+        }
+
+        @keyframes placeholder-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
-  </head>
+</head>
 
-  <body>
-
-
-    <div class="uk-grid uk-grid-collapse">
-      <div id="sidebar" class="uk-width-1-3@m">
-
-        <div class="uk-padding-small">
-
-          <div>
-            <h2 class='uk-margin-remove-bottom'><img style='width:40px'
-                src='https://wiki.openstreetmap.org/w/images/0/07/OpenStreetMap-India.svg'>OpenStreetMap <b>India</b></h2>
-          </div>
-          <p>Join the volunteer community of citizens crowdsourcing a free and open source map of India using the <a
-              href='https://www.openstreetmap.org/export#map=15/18.9325/72.8407' taget="_blank">OpenStreetMap Project</a>.
-          </p>
-          <p>
-            <button id='edit-map' class="uk-button uk-button-primary uk-button-small" type="button"><span
-                uk-icon="pencil"></span> Edit the
-              map</button>
-            <a href="https://wiki.openstreetmap.org/wiki/India"><button
-                class="uk-button uk-button-default uk-button-small" type="button"><span uk-icon="file-edit"></span>
-                Mapping wiki</button></a>
-            <a href="https://community.osm.be/resources/asia/india" taget="_blank"><button
-                class="uk-button uk-button-default uk-button-small" type="button"><span uk-icon="users"></span> Join
-                community</button></a>
-
-          </p>
-          <p>
-            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/d6n29CU2-Sg" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen uk-responsive></iframe>
-          </p>
-          <p> <button class="uk-button uk-button-default uk-button-small" type="button"
-              uk-toggle="target: #modal-about">About OpenStreetMap</button>
-
-            <button class="uk-button uk-button-default uk-button-small" type="button"
-              uk-toggle="target: #modal-download">Download India Data</button>
-          </p>
-          <div class="uk-card uk-card-primary uk-card-body uk-width-1-1 uk-padding-small">
-            <p>
-              Explore recent mapping activity in India<br>
-              <a href='https://osmlab.github.io/show-me-the-way/#bounds=6.7,67.7,36.4,97.4'><button
-                  class="uk-button uk-button-default uk-button-small">Live map edits</button></a>
-              <a href='http://resultmaps.neis-one.org/osm-discussions?c=India#4/21.17/78.63'><button
-                  class="uk-button uk-button-default uk-button-small">Map discussion</button></a>
-              <a
-                href='https://resultmaps.neis-one.org/osm-suspicious?country=124&hours=48&tsearch=&mappingdays=50&comp=%3E&value=10&action=d&obj=n&filterkey=#5/18.646/77.124'><button
-                  class="uk-button uk-button-default uk-button-small">Recent edits</button></a>
-              <a
-                href='https://metrics.improveosm.org/navigable-roads/total-metrics-per-interval?duration=monthly&locationType=country&locationId=99&unit=km&from=2016-02-14&to=2021-10-03'><button
-                  class="uk-button uk-button-default uk-button-small">Data metrics</button></a>
-            </p>
-
-            <div class="mt-container">
-              <div id="mt-body" class="mt-body" role="feed">
-                <div class="loading-spinner"></div>
-              </div>
-            </div>
-          </div>
-
-          <footer>
-            <p>
-              <a href='https://wiki.openstreetmap.org/wiki/India' target="_blank">Wiki</a> |
-              <a href='https://t.me/OSMIndia' target="_blank">Telegram</a> |
-              <a href='https://matrix.to/#/#osm-in-general:matrix.org' target="_blank">Matrix</a> |
-              <a href='https://github.com/osm-in/openstreetmap.in/' target="_blank">Github</a> |
-              <a href='https://en.osm.town/@OSMIndia' rel='me' target="_blank">Mastodon</a> |
-              <a href='https://twitter.com/osm_in' target="_blank">Twitter</a>
-            </p>
-          </footer>
-
+<body>
+    <div id="placeholder">
+        <div id="placeholder-content">
+            <img id="placeholder-logo" alt="">
+            <div id="placeholder-name">Loading the map…</div>
+            <div id="placeholder-tagline"></div>
+            <div id="placeholder-spinner"></div>
         </div>
-
-      </div>
-      <div class="uk-width-2-3@m uk-inline">
-        <div id='map' class='uk-height-1-1 '></div>
-        <div id="map-overlay" class="uk-overlay uk-position-bottom">
-          <div id="map-overlay-content" class="uk-card uk-card-body uk-card-default uk-width-1-2@m">
-            <h3 class="uk-card-title">Click locations for details</h3>
-          </div>
-
-        </div>
-      </div>
-
     </div>
 
-    <!-- This is the modal -->
-    <div id="modal-about" uk-modal>
-      <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Why create an open map?</h2>
-        <p>
-          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Phwrgb16oEM" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+    <!-- Permissions are not inherited across a cross-origin iframe, so each
+         one the map uses has to be granted here: geolocation to find the
+         visitor, and the motion sensors the compass reads to rotate the map
+         with the device. -->
+    <iframe id="atlas" title="OpenStreetMap India map"
+        allow="geolocation; fullscreen; accelerometer; gyroscope; magnetometer"></iframe>
 
+    <noscript>
+        <p style="color:#e7ebf2;font-family:sans-serif;padding:1rem">
+            This map needs JavaScript. Open
+            <a href="https://amche.in/?atlas=osm" style="color:#ffbf00">amche.in</a> directly instead.
         </p>
-        <h3>Users of OpenStreetMap data in India</h3>
-        <ul>
-          <li><a href="https://wiki.openstreetmap.org/wiki/Ola_-_Organised_Editing">Ola</a></li>
-          <li><a href="https://wiki.openstreetmap.org/wiki/Swiggy_-_Organised_Editing">Swiggy</a></li>
-          <li><a href="https://en.wikipedia.org/wiki/Budge_Budge#/maplink/0">Wikipedia</a></li>
-          <li><a href="https://wiki.openstreetmap.org/wiki/Tips_for_new_(Pokemon_Go)_mappers">Pokemon Go</a></li>
-          <li><a href='https://wiki.openstreetmap.org/wiki/Mapathon_Keralam'>Kerala State IT Mission</a></li>
-          <li><a href='https://onemapggm.mcg.gov.in/citizenportal/'>OneMap Gurugram - Municipal Corporation of
-              Gurugram</a></li>
-          <li><a href='https://iisc.ac.in/about/general-information/campus-map/'>IISc - Indian Institute of Science</a></li>
-          <li><a href="https://wiki.openstreetmap.org/wiki/Organised_Editing/Activities/Apple">Apple</a></li>
-          <li><a href="https://wiki.openstreetmap.org/wiki/Organised_Editing/Activities/Facebook">Facebook</a></li>
-          <li><a href="https://wiki.openstreetmap.org/wiki/Organised_Editing/Activities/Amazon">Amazon</a></li>
-          <li>Justdial</li>
-          <li>Zomato</li>
-          <li>Pinterest</li>
-          <li>TravelGuru</li>
-          <li>Yatra.com</li>
-          <li>NHAI - National Highways Authority of India</li>
-        </ul>
-        and many more!
+    </noscript>
 
-        <p class="uk-text-right">
-          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-        </p>
-      </div>
-    </div>
+    <script type="module" src="./site-chrome.js"></script>
+</body>
 
-    <!-- This is the modal -->
-    <div id="modal-download" uk-modal>
-      <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Using OpenStreetMap India map data</h2>
-        <img src='./img/vivekananda-rock-memorial-map-data.gif'>
-        <p>OpenStreetMap data is available for free download and use per <a
-            href='https://www.openstreetmap.org/copyright'>Open Data Commons Open Database License (ODbL)</a>. Various
-          data download and export formats based on user needs. Check the <a
-            href='https://wiki.openstreetmap.org/wiki/Downloading_data'>wiki for more details.</a></p>
-        <p>For a map in Indic languages, check the <a href='https://osm-in.github.io/indic-map/'>Indic OpenStreetMap
-            demo</a> and the <a href='https://wiki.openstreetmap.org/wiki/Map_internationalization_(India)'>wiki</a> for
-          more resources for local language maps</p>
-
-        <h3>Download free India map data</h3>
-        <h4>APIs</h4>
-        <ul>
-          <li>Query the live map data for specific objects using Overpass API. Updated minutely. `.geojson` `.csv`
-            `.gpx` `google earth .kml`
-            <uL>
-              <li><a href="https://overpass-turbo.eu/s/YoV">Bus stops and bus stations in Chennai</a></li>
-              <li><a href="http://overpass-turbo.eu/s/YJB">All forts and castles in India</a></li>
-              <li><a href="http://overpass-turbo.eu/s/YJG">CSV list of all railway stations in India</a></li>
-            </uL>
-          </li>
-        </ul>
-        <h4>Downloads</h4>
-        <ul>
-          <li>Request custom data extracts from <a href="https://export.hotosm.org/en/v3/">Humanitarian OpenStreetMap
-              Team (HOTOSM)</a>. Updated 2-3 days. `geopackage .gpkg` `shapefiles .shp` `garmin .img` `google earth
-            .kml` `.mbtiles` `maps.me .mwm` `osmand .obf`</li>
-          <li>India OSM data extract from <a href="https://download.geofabrik.de/asia/india.html">Geofabrik.de</a>.
-            Updated daily. `osm pbf` `shapefiles`</li>
-          <li>Raw OSM data from <a href="https://www.openstreetmap.org/export#map=15/18.9325/72.8407">OSM.org</a>.
-            Limited area. Updated minutely. `osm xml`</li>
-          <li>Administrative boundaries clipped to land area from <a href="https://osm-boundaries.com/Map">OSM
-              Boundaries</a>. Updated monthly. `.geojson`</li>
-          <li>Snapshot of full India outline as per Survey of India from <a
-              href="https://github.com/datameet/maps/blob/master/Country/india-osm.geojson">Datameet Maps</a>. Limited
-            area. Not updated. `.geojson`</li>
-        </ul>
-
-        <p class="uk-text-right">
-          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-        </p>
-      </div>
-    </div>
-
-
-    <script>
-      function editMap() {
-        console.log(this)
-      }
-    </script>
-    <script src="./dist/main.js"></script>
-
-  </body>
-
-  </html>
+</html>

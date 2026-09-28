@@ -1,0 +1,238 @@
+{
+  "name": "OpenStreetMap India",
+  "description": "Community maps of India from the <a href='https://openstreetmap.in/'>OpenStreetMap India</a> community, rendered by <a href='https://amche.in'>Amche Atlas</a>.",
+  "areaOfInterest": "India",
+  "color": "#7ebc6f",
+  "site": {
+    "instance": "https://amche.in/dev",
+    "params": {
+      "renderer": "maplibre",
+      "terrain": "1.5",
+      "lang": "en,hi",
+      "geolocate": "true"
+    },
+    "brand": {
+      "name": "OpenStreetMap India",
+      "logo": "../osm-india-stamp-2026.svg",
+      "href": "./",
+      "tagline": "Join the volunteer community of citizens crowdsourcing a free and open source map of India using the OpenStreetMap Project."
+    },
+    "bar": [
+      {
+        "label": "Edit",
+        "href": "https://www.openstreetmap.org/edit#map={zoom}/{lat}/{lng}"
+      },
+      {
+        "label": "Wiki",
+        "href": "https://wiki.openstreetmap.org/wiki/India"
+      },
+      {
+        "label": "Community",
+        "href": "https://community.osm.be/resources/asia/india"
+      }
+    ],
+    "actions": [
+      {
+        "label": "Edit the map",
+        "href": "https://www.openstreetmap.org/edit#map={zoom}/{lat}/{lng}"
+      },
+      {
+        "label": "Mapping wiki",
+        "href": "https://wiki.openstreetmap.org/wiki/India"
+      },
+      {
+        "label": "Join the community",
+        "href": "https://community.osm.be/resources/asia/india"
+      }
+    ],
+    "menu": [
+      {
+        "title": "Recent mapping activity",
+        "items": [
+          {
+            "label": "Live map edits",
+            "href": "https://osmlab.github.io/show-me-the-way/#bounds=6.7,67.7,36.4,97.4",
+            "note": "Edits across India as they are uploaded"
+          },
+          {
+            "label": "Map discussion",
+            "href": "https://resultmaps.neis-one.org/osm-discussions?c=India#4/21.17/78.63",
+            "note": "Changeset comments between mappers"
+          },
+          {
+            "label": "Recent edits",
+            "href": "https://resultmaps.neis-one.org/osm-suspicious?country=124&hours=48&tsearch=&mappingdays=50&comp=%3E&value=10&action=d&obj=n&filterkey=#5/18.646/77.124",
+            "note": "Last 48 hours, flagged for review"
+          },
+          {
+            "label": "Data metrics",
+            "href": "https://metrics.improveosm.org/navigable-roads/total-metrics-per-interval?duration=monthly&locationType=country&locationId=99&unit=km&from=2016-02-14&to=2021-10-03",
+            "note": "Navigable road length mapped over time"
+          }
+        ]
+      },
+      {
+        "title": "Download India data",
+        "items": [
+          {
+            "label": "Geofabrik extract",
+            "href": "https://download.geofabrik.de/asia/india.html",
+            "note": "Whole country, daily. osm.pbf, shapefiles"
+          },
+          {
+            "label": "HOT Export Tool",
+            "href": "https://export.hotosm.org/en/v3/",
+            "note": "Custom extracts. gpkg, shp, kml, mbtiles, obf"
+          },
+          {
+            "label": "Overpass Turbo",
+            "href": "https://overpass-turbo.eu/",
+            "note": "Query live data by tag. geojson, csv, gpx"
+          },
+          {
+            "label": "OSM Boundaries",
+            "href": "https://osm-boundaries.com/Map",
+            "note": "Administrative boundaries clipped to land"
+          },
+          {
+            "label": "Export this view",
+            "href": "https://www.openstreetmap.org/export#map={zoom}/{lat}/{lng}",
+            "note": "Raw OSM XML for the area on screen"
+          }
+        ]
+      },
+      {
+        "title": "Get in touch",
+        "items": [
+          {
+            "label": "Telegram",
+            "href": "https://t.me/OSMIndia"
+          },
+          {
+            "label": "Matrix",
+            "href": "https://matrix.to/#/#osm-in-general:matrix.org"
+          },
+          {
+            "label": "Mastodon",
+            "href": "https://en.osm.town/@OSMIndia"
+          },
+          {
+            "label": "Twitter",
+            "href": "https://twitter.com/osm_in"
+          },
+          {
+            "label": "GitHub",
+            "href": "https://github.com/osm-in/openstreetmap.in/"
+          }
+        ]
+      }
+    ],
+    "about": "<p>OpenStreetMap data is free to download and use under the <a href='https://www.openstreetmap.org/copyright'>Open Database License</a>. For a map in Indic languages see the <a href='https://osm-in.github.io/indic-map/'>Indic OpenStreetMap demo</a> and the <a href='https://wiki.openstreetmap.org/wiki/Map_internationalization_(India)'>internationalization wiki</a>.</p>",
+    "footer": [
+      {
+        "label": "About OpenStreetMap",
+        "href": "https://www.openstreetmap.org/about"
+      },
+      {
+        "label": "Page source",
+        "href": "https://github.com/publicmap/amche-atlas/tree/main/docs/guides/embed-osm-india"
+      }
+    ]
+  },
+  "atlases": [
+    "osm",
+    "world",
+    "mapbox",
+    "india"
+  ],
+  "map": {
+    "style": null,
+    "backgroundColor": "#0b1b2b",
+    "center": [
+      76.9541,
+      10.8293
+    ],
+    "zoom": 10.32,
+    "bearing": 0,
+    "pitch": 0
+  },
+  "layers": [
+    {
+      "id": "osm-places",
+      "initiallyChecked": true
+    },
+    {
+      "id": "mapbox-admin-lines",
+      "initiallyChecked": true
+    },
+    {
+      "id": "india-state",
+      "initiallyChecked": true,
+      "inspect": false
+    },
+    {
+      "id": "osm-public-transport",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-3d-buildings",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-paths",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-roads",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-railways",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-waterways",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-waterbodies",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-landuse",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-pois",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-sites",
+      "initiallyChecked": true
+    },
+    {
+      "id": "mapbox-countries",
+      "initiallyChecked": false,
+      "style": {
+        "fill-opacity": 1,
+        "fill-color": "#7ebc6f"
+      }
+    },
+    {
+      "id": "osm-boundaries-india",
+      "initiallyChecked": true
+    },
+    {
+      "id": "osm-topo",
+      "initiallyChecked": false
+    },
+    {
+      "id": "osm-ocean",
+      "initiallyChecked": true
+    },
+    {
+      "id": "mapbox-satellite",
+      "initiallyChecked": true
+    }
+  ]
+}
