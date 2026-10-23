@@ -12,19 +12,20 @@
         instance instead of hosting one. Implements the approach in
         github.com/osm-in/osm-in.github.io/issues/90.
 
-        Three files, and only one of them is yours to edit:
+        Two files, and only the config is yours to edit:
 
           index.html       this file - the frame and the page shell
           site-chrome.js   boilerplate: loads the config, builds the iframe
-                           URL, draws the top-right bar and the menu panel
-          site-chrome.css  boilerplate: how that bar and panel look
+                           URL, keeps this page's address bar in sync
 
           config/index.atlas.json   <- everything specific to your community
 
         The config file is doing double duty. Amche reads the parts it knows
         (`map`, `layers`, `atlases`, `name`, `color`) to build the map, and
-        ignores the rest; this page reads the `site` block Amche ignores, and
-        builds its own branding out of it. So a community adopting this
+        ignores the rest, and its `site` block puts this community's name on
+        the map: Amche draws `site.brand` on its splash card, its main menu
+        and the menu button above its console, and lists `site.actions` and
+        `site.menu` at the top of that menu. So a community adopting this
         forks the folder, rewrites one JSON file, and is done.
 
         Three things are wired up between the page and the map:
@@ -50,7 +51,6 @@
            of to amche.in. The atlas falls back to the referrer if this message
            never arrives, so it is belt and braces rather than required.
     -->
-    <link rel="stylesheet" href="./site-chrome.css">
     <style>
         html,
         body {
@@ -65,78 +65,10 @@
             height: 100%;
             border: 0;
         }
-
-        #placeholder {
-            position: fixed;
-            inset: 0;
-            z-index: 15;
-            /* Above the iframe (which is itself z-index: auto, but this stays
-               opaque/on top for as long as it exists regardless), so it fully
-               hides whatever the atlas's own splash is doing underneath while
-               this page's branding is up - see site-chrome.js. */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #0f172a;
-            color: #94a3b8;
-            font: 0.9rem -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        #placeholder-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        #placeholder-logo {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-            display: none;
-        }
-
-        #placeholder-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #e5e7eb;
-        }
-
-        #placeholder-tagline {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            max-width: 320px;
-        }
-
-        #placeholder-spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-top-color: #3b82f6;
-            border-radius: 50%;
-            animation: placeholder-spin 1s linear infinite;
-        }
-
-        @keyframes placeholder-spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
     </style>
 </head>
 
 <body>
-    <div id="placeholder">
-        <div id="placeholder-content">
-            <img id="placeholder-logo" alt="">
-            <div id="placeholder-name">Loading the map…</div>
-            <div id="placeholder-tagline"></div>
-            <div id="placeholder-spinner"></div>
-        </div>
-    </div>
-
     <!-- Permissions are not inherited across a cross-origin iframe, so each
          one the map uses has to be granted here: geolocation to find the
          visitor, and the motion sensors the compass reads to rotate the map

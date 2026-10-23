@@ -8,7 +8,7 @@
     "params": {
       "renderer": "maplibre",
       "terrain": "1.5",
-      "lang": "en,hi",
+      "lang": "en",
       "geolocate": "true"
     },
     "brand": {
@@ -17,20 +17,6 @@
       "href": "./",
       "tagline": "Join the volunteer community of citizens crowdsourcing a free and open source map of India using the OpenStreetMap Project."
     },
-    "bar": [
-      {
-        "label": "Edit",
-        "href": "https://www.openstreetmap.org/edit#map={zoom}/{lat}/{lng}"
-      },
-      {
-        "label": "Wiki",
-        "href": "https://wiki.openstreetmap.org/wiki/India"
-      },
-      {
-        "label": "Community",
-        "href": "https://community.osm.be/resources/asia/india"
-      }
-    ],
     "actions": [
       {
         "label": "Edit the map",
@@ -127,11 +113,18 @@
         ]
       }
     ],
-    "about": "<p>OpenStreetMap data is free to download and use under the <a href='https://www.openstreetmap.org/copyright'>Open Database License</a>. For a map in Indic languages see the <a href='https://osm-in.github.io/indic-map/'>Indic OpenStreetMap demo</a> and the <a href='https://wiki.openstreetmap.org/wiki/Map_internationalization_(India)'>internationalization wiki</a>.</p>",
     "footer": [
       {
         "label": "About OpenStreetMap",
         "href": "https://www.openstreetmap.org/about"
+      },
+      {
+        "label": "Open Database License",
+        "href": "https://www.openstreetmap.org/copyright"
+      },
+      {
+        "label": "Indic map demo",
+        "href": "https://osm-in.github.io/indic-map/"
       },
       {
         "label": "Page source",
@@ -143,7 +136,9 @@
     "osm",
     "world",
     "mapbox",
-    "india"
+    "india",
+    "goa",
+    "parivesh"
   ],
   "map": {
     "style": null,
@@ -163,11 +158,11 @@
     },
     {
       "id": "mapbox-admin-lines",
-      "initiallyChecked": true
+      "initiallyChecked": false
     },
     {
       "id": "india-state",
-      "initiallyChecked": true,
+      "initiallyChecked": false,
       "inspect": false
     },
     {
@@ -220,7 +215,7 @@
     },
     {
       "id": "osm-boundaries-india",
-      "initiallyChecked": true
+      "initiallyChecked": false
     },
     {
       "id": "osm-topo",
@@ -228,7 +223,7 @@
     },
     {
       "id": "osm-ocean",
-      "initiallyChecked": true
+      "initiallyChecked": false
     },
     {
       "id": "mapbox-satellite",
